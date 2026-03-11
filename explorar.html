@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Explorar Escuelas — Mi Escuela Primero</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="explorar.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ========== NAVIGATION ========== -->
+  <nav class="nav" id="navbar">
+    <div class="nav__inner container">
+      <a href="index.html" class="nav__logo">
+        <div class="nav__logo-icon">
+          <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"/>
+          </svg>
+        </div>
+        <span>Mi Escuela Primero</span>
+      </a>
+
+      <div class="nav__links" id="navLinks">
+        <a href="index.html" class="nav__link">Inicio</a>
+        <a href="explorar.html" class="nav__link nav__link--active">Explorar Escuelas</a>
+        <a href="formas-apoyar.html" class="nav__link">Formas de Apoyar</a>
+        <a href="donante.html" class="nav__link">Ser Donante</a>
+      </div>
+
+      <button class="nav__hamburger" id="hamburgerBtn" aria-label="Abrir menú" aria-expanded="false">
+        <span class="nav__hamburger-bar"></span>
+        <span class="nav__hamburger-bar"></span>
+        <span class="nav__hamburger-bar"></span>
+      </button>
+    </div>
+
+    <div class="nav__mobile" id="mobileMenu" aria-hidden="true">
+      <a href="index.html" class="nav__mobile-link">Inicio</a>
+      <a href="explorar.html" class="nav__mobile-link nav__mobile-link--active">Explorar Escuelas</a>
+      <a href="formas-apoyar.html" class="nav__mobile-link">Formas de Apoyar</a>
+      <a href="donante.html" class="nav__mobile-link">Ser Donante</a>
+    </div>
+  </nav>
+
+  <main class="explore-main">
+    <div class="container explore-layout">
+
+      <!-- ========== PAGE HEADER ========== -->
+      <header class="explore-header">
+        <h1 class="explore-header__title">Explorar Escuelas</h1>
+        <p class="explore-header__subtitle">
+          Encuentra escuelas necesitadas y descubre cómo puedes generar un impacto
+        </p>
+      </header>
+
+      <div class="explore-body">
+
+        <!-- ========== SIDEBAR ========== -->
+        <aside class="filters-sidebar" id="filtersSidebar">
+
+          <div class="filters-card">
+            <h3 class="filters-card__heading">
+              <!-- Search icon -->
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+              </svg>
+              Filtros
+            </h3>
+
+            <!-- Search -->
+            <div class="filter-group">
+              <label class="filter-label" for="searchInput">Buscar Escuelas</label>
+              <div class="filter-input-wrap">
+                <svg class="filter-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                </svg>
+                <input
+                  class="filter-input"
+                  id="searchInput"
+                  type="search"
+                  placeholder="Nombre o ubicación..."
+                  autocomplete="off"
+                />
+              </div>
+            </div>
+
+            <!-- Municipality -->
+            <div class="filter-group">
+              <label class="filter-label" for="countySelect">Municipio</label>
+              <div class="filter-select-wrap">
+                <select class="filter-select" id="countySelect">
+                  <option value="Todos los Municipios">Todos los Municipios</option>
+                  <option value="Zapopan">Zapopan</option>
+                  <option value="Arandas">Arandas</option>
+                  <option value="San Juan de los Lagos">San Juan de los Lagos</option>
+                  <option value="Tlaquepaque">Tlaquepaque</option>
+                </select>
+                <svg class="filter-select-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="6 9 12 15 18 9"/>
+                </svg>
+              </div>
+            </div>
+
+            <!-- Donation type -->
+            <div class="filter-group">
+              <label class="filter-label" for="donationTypeSelect">Tipo de Donación</label>
+              <div class="filter-select-wrap">
+                <select class="filter-select" id="donationTypeSelect">
+                  <option value="Todos los Tipos">Todos los Tipos</option>
+                  <option value="En especie">En especie</option>
+                  <option value="Económica">Económica</option>
+                  <option value="Voluntariado">Voluntariado</option>
+                  <option value="Talleres">Talleres</option>
+                  <option value="Vinculación">Vinculación</option>
+                </select>
+                <svg class="filter-select-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="6 9 12 15 18 9"/>
+                </svg>
+              </div>
+            </div>
+
+            <button class="btn btn--outline-primary w-full" id="clearFiltersBtn">Limpiar Filtros</button>
+          </div>
+
+          <!-- Results count -->
+          <div class="results-badge">
+            <span class="results-badge__number" id="resultsCount">6</span>
+            <span class="results-badge__label" id="resultsLabel">Escuelas coinciden con tus criterios</span>
+          </div>
+
+        </aside>
+
+        <!-- ========== MAIN CONTENT ========== -->
+        <div class="explore-content">
+
+          <!-- View controls -->
+          <div class="view-controls">
+            <p class="view-controls__count" id="showingText">Mostrando 6 escuelas</p>
+            <div class="view-toggle" role="group" aria-label="Modo de vista">
+              <button class="view-toggle__btn view-toggle__btn--active" id="gridViewBtn" aria-pressed="true">
+                <!-- Grid icon -->
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/>
+                </svg>
+                Cuadrícula
+              </button>
+              <button class="view-toggle__btn" id="mapViewBtn" aria-pressed="false">
+                <!-- Map icon -->
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/>
+                </svg>
+                Mapa
+              </button>
+            </div>
+          </div>
+
+          <!-- ── GRID VIEW ── -->
+          <div class="schools-grid" id="schoolsGrid">
+            <!-- Cards injected by JS -->
+          </div>
+
+          <!-- ── MAP VIEW ── -->
+          <div class="map-view hidden" id="mapView">
+            <div class="map-placeholder">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/>
+              </svg>
+              <h3>Vista de Mapa</h3>
+              <p id="mapCountText">Mapa interactivo que muestra 6 escuelas en tu área seleccionada.<br>Esto mostraría una integración de mapa real en producción.</p>
+            </div>
+          </div>
+
+          <!-- ── EMPTY STATE ── -->
+          <div class="empty-state hidden" id="emptyState">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+            <h3>No se encontraron escuelas</h3>
+            <p>Intenta ajustar tus filtros para ver más resultados</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="main.js"></script>
+  <script src="explorar.js"></script>
+</body>
+</html>

@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mi Escuela Primero</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ========== NAVIGATION ========== -->
+  <nav class="nav" id="navbar">
+    <div class="nav__inner container">
+      <a href="index.html" class="nav__logo">
+        <div class="nav__logo-icon">
+          <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"/>
+          </svg>
+        </div>
+        <span>Mi Escuela Primero</span>
+      </a>
+
+      <div class="nav__links" id="navLinks">
+        <a href="index.html" class="nav__link nav__link--active">Inicio</a>
+        <a href="explorar.html" class="nav__link">Explorar Escuelas</a>
+        <a href="formas-apoyar.html" class="nav__link">Formas de Apoyar</a>
+        <a href="donante.html" class="nav__link">Ser Donante</a>
+      </div>
+
+      <button class="nav__hamburger" id="hamburgerBtn" aria-label="Abrir menú" aria-expanded="false">
+        <span class="nav__hamburger-bar"></span>
+        <span class="nav__hamburger-bar"></span>
+        <span class="nav__hamburger-bar"></span>
+      </button>
+    </div>
+
+    <!-- Mobile menu -->
+    <div class="nav__mobile" id="mobileMenu" aria-hidden="true">
+      <a href="index.html" class="nav__mobile-link nav__mobile-link--active">Inicio</a>
+      <a href="explorar.html" class="nav__mobile-link">Explorar Escuelas</a>
+      <a href="formas-apoyar.html" class="nav__mobile-link">Formas de Apoyar</a>
+      <a href="donante.html" class="nav__mobile-link">Ser Donante</a>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- ========== HERO ========== -->
+    <section class="hero">
+      <div class="hero__bg-overlay" aria-hidden="true"></div>
+      <div class="container hero__inner">
+        <div class="hero__content">
+          <h1 class="hero__title">Mi Escuela Primero</h1>
+          <p class="hero__subtitle">
+            Conoce cómo trabajamos junto a las comunidades escolares para fortalecer
+            las condiciones de aprendizaje en las escuelas públicas de contextos
+            vulnerables de Jalisco.
+          </p>
+          <div class="hero__actions">
+            <a href="explorar.html" class="btn btn--secondary btn--lg">Explorar Escuelas</a>
+            <a href="donante.html" class="btn btn--outline-white btn--lg">Ser Donante</a>
+          </div>
+        </div>
+
+        <div class="hero__image-wrap" aria-hidden="true">
+          <div class="hero__image-frame">
+            <img
+              src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=1200&q=80"
+              alt="Niños aprendiendo en el aula"
+              class="hero__image"
+              loading="eager"
+            />
+          </div>
+          <div class="hero__badge">
+            <svg class="hero__badge-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402z"/>
+            </svg>
+            <div class="hero__badge-text">
+              <span class="hero__badge-number">2,770+</span>
+              <span class="hero__badge-label">Estudiantes Impactados</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== HOW IT WORKS ========== -->
+    <section class="section section--muted" id="como-funciona">
+      <div class="container">
+        <div class="section__header">
+          <h2 class="section__title">Cómo Funciona</h2>
+          <p class="section__subtitle">
+            Hacer la diferencia es simple. Sigue estos cuatro pasos para comenzar tu viaje de impacto.
+          </p>
+        </div>
+
+        <div class="steps-grid">
+
+          <article class="step-card">
+            <div class="step-card__number">1</div>
+            <div class="step-card__icon-wrap">
+              <!-- BookOpen icon -->
+              <svg class="step-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+              </svg>
+            </div>
+            <h3 class="step-card__title">Explora Escuelas</h3>
+            <p class="step-card__desc">Navega por escuelas necesitadas y conoce sus requisitos y objetivos específicos.</p>
+          </article>
+
+          <article class="step-card">
+            <div class="step-card__number">2</div>
+            <div class="step-card__icon-wrap">
+              <!-- Heart icon -->
+              <svg class="step-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+              </svg>
+            </div>
+            <h3 class="step-card__title">Elige tu Impacto</h3>
+            <p class="step-card__desc">Selecciona cómo quieres ayudar: donaciones, materiales, voluntariado o talleres.</p>
+          </article>
+
+          <article class="step-card">
+            <div class="step-card__number">3</div>
+            <div class="step-card__icon-wrap">
+              <!-- Gift icon -->
+              <svg class="step-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/>
+              </svg>
+            </div>
+            <h3 class="step-card__title">Haz tu Contribución</h3>
+            <p class="step-card__desc">Completa tu donación a través de nuestra plataforma segura y transparente.</p>
+          </article>
+
+          <article class="step-card">
+            <div class="step-card__number">4</div>
+            <div class="step-card__icon-wrap">
+              <!-- TrendingUp icon -->
+              <svg class="step-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/>
+              </svg>
+            </div>
+            <h3 class="step-card__title">Seguimiento del Progreso</h3>
+            <p class="step-card__desc">Ve el impacto en tiempo real de tu contribución y los logros de la escuela.</p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== IMPACT METRICS ========== -->
+    <section class="section section--white" id="impacto">
+      <div class="container">
+        <div class="section__header">
+          <h2 class="section__title">Nuestro Impacto Juntos</h2>
+          <p class="section__subtitle">Números reales, cambio real. Observa el impacto colectivo de nuestra comunidad.</p>
+        </div>
+
+        <div class="metrics-grid">
+
+          <article class="metric-card">
+            <div class="metric-card__icon-wrap metric-card__icon-wrap--primary">
+              <!-- Users icon -->
+              <svg class="metric-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+            </div>
+            <div class="metric-card__number metric-card__number--primary" data-target="16">16+</div>
+            <p class="metric-card__label">Escuelas Apoyadas</p>
+          </article>
+
+          <article class="metric-card metric-card--featured">
+            <div class="metric-card__icon-wrap metric-card__icon-wrap--secondary">
+              <!-- Gift icon -->
+              <svg class="metric-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/>
+              </svg>
+            </div>
+            <div class="metric-card__number metric-card__number--secondary" data-target="1250">1,250+</div>
+            <p class="metric-card__label">Donaciones Completadas</p>
+          </article>
+
+          <article class="metric-card">
+            <div class="metric-card__icon-wrap metric-card__icon-wrap--primary">
+              <!-- Heart icon -->
+              <svg class="metric-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+              </svg>
+            </div>
+            <div class="metric-card__number metric-card__number--primary" data-target="2770">2,770+</div>
+            <p class="metric-card__label">Estudiantes Impactados</p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== FORMAS DE APOYAR CTA ========== -->
+    <section class="section cta-band">
+      <div class="container cta-band__inner">
+        <!-- ListChecks icon -->
+        <svg class="cta-band__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M10 6H4a2 2 0 0 0-2 2v10c0 1.1.9 2 2 2h16a2 2 0 0 0 2-2v-5"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="13"/><polyline points="20 10 22 12 18 16"/>
+        </svg>
+        <h2 class="cta-band__title">¿Cómo Puedes Ayudar?</h2>
+        <p class="cta-band__desc">
+          Desde materiales educativos hasta formación docente, existen muchas formas de contribuir.
+          Descubre todas las opciones disponibles.
+        </p>
+        <a href="formas-apoyar.html" class="btn btn--primary btn--lg">Ver Formas de Apoyar</a>
+      </div>
+    </section>
+
+    <!-- ========== TESTIMONIALS ========== -->
+    <section class="section section--gradient-bottom" id="testimonios">
+      <div class="container">
+        <div class="section__header">
+          <h2 class="section__title">Historias de Nuestra Comunidad</h2>
+          <p class="section__subtitle">
+            Escucha a maestros, donantes y voluntarios que están haciendo la educación accesible para todos.
+          </p>
+        </div>
+
+        <div class="testimonials-grid">
+
+          <article class="testimonial-card">
+            <div class="testimonial-card__header">
+              <img
+                src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80"
+                alt="María González"
+                class="testimonial-card__avatar"
+                loading="lazy"
+              />
+              <div class="testimonial-card__meta">
+                <div class="testimonial-card__name">María González</div>
+                <div class="testimonial-card__role">Maestra, Escuela La Esperanza</div>
+              </div>
+            </div>
+            <p class="testimonial-card__quote">
+              "Gracias a las generosas donaciones, ahora tenemos los materiales y la tecnología
+              que nuestros estudiantes merecen. El impacto en su aprendizaje ha sido increíble."
+            </p>
+          </article>
+
+          <article class="testimonial-card">
+            <div class="testimonial-card__header">
+              <img
+                src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80"
+                alt="Carlos Ramírez"
+                class="testimonial-card__avatar"
+                loading="lazy"
+              />
+              <div class="testimonial-card__meta">
+                <div class="testimonial-card__name">Carlos Ramírez</div>
+                <div class="testimonial-card__role">Donante Corporativo</div>
+              </div>
+            </div>
+            <p class="testimonial-card__quote">
+              "Apoyar estas escuelas ha sido una de las decisiones más gratificantes para nuestra
+              empresa. Vemos el impacto directo de cada contribución."
+            </p>
+          </article>
+
+          <article class="testimonial-card">
+            <div class="testimonial-card__header">
+              <img
+                src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&q=80"
+                alt="Ana Patricia Rojas"
+                class="testimonial-card__avatar"
+                loading="lazy"
+              />
+              <div class="testimonial-card__meta">
+                <div class="testimonial-card__name">Ana Patricia Rojas</div>
+                <div class="testimonial-card__role">Madre y Voluntaria</div>
+              </div>
+            </div>
+            <p class="testimonial-card__quote">
+              "Esta plataforma hizo que fuera tan fácil contribuir. Ahora soy voluntaria
+              semanalmente y ver la transformación de la escuela de mi hijo ha sido hermoso."
+            </p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== FINAL CTA ========== -->
+    <section class="section final-cta">
+      <div class="container final-cta__inner">
+        <!-- HandHeart icon -->
+        <svg class="final-cta__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M11 14H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v5"/><path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402z" transform="translate(8 1) scale(0.65)"/>
+          <path d="M21 11.5a2.5 2.5 0 0 1 0 5h-.5" /><path d="M18 11h1a2 2 0 1 1 0 4h-1" /><path d="m14 17.5 4-1.5V11l-4-1.5A1.5 1.5 0 0 0 12.5 11v5A1.5 1.5 0 0 0 14 17.5z"/>
+        </svg>
+        <h2 class="final-cta__title">¿Listo para Hacer la Diferencia?</h2>
+        <p class="final-cta__desc">
+          Tu contribución, sin importar el tamaño, crea un cambio duradero en la vida de un niño.
+          Únete hoy a nuestra comunidad de agentes de cambio.
+        </p>
+        <div class="final-cta__actions">
+          <a href="explorar.html" class="btn btn--secondary btn--lg">Ver Escuelas</a>
+          <a href="formas-apoyar.html" class="btn btn--outline-white btn--lg">Formas de Apoyar</a>
+          <a href="donante.html" class="btn btn--outline-white btn--lg">Comienza tu Viaje</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="container footer__inner">
+
+      <div class="footer__brand">
+        <div class="footer__logo">
+          <div class="footer__logo-icon">
+            <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"/>
+            </svg>
+          </div>
+          <span>Mi Escuela Primero</span>
+        </div>
+        <p class="footer__tagline">
+          Conectando donantes con escuelas para crear un impacto educativo duradero en las comunidades.
+        </p>
+      </div>
+
+      <div class="footer__links">
+        <h4 class="footer__links-title">Enlaces Rápidos</h4>
+        <ul class="footer__links-list">
+          <li><a href="index.html" class="footer__link">Inicio</a></li>
+          <li><a href="explorar.html" class="footer__link">Explorar Escuelas</a></li>
+          <li><a href="formas-apoyar.html" class="footer__link">Formas de Apoyar</a></li>
+          <li><a href="donante.html" class="footer__link">Ser Donante</a></li>
+          <li><a href="admin/index.html" class="footer__link">Admin Panel</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__contact">
+        <h4 class="footer__links-title">Contacto</h4>
+        <p class="footer__contact-info">
+          info@escuelasconectadas.org<br />
+          +506 1234-5678
+        </p>
+      </div>
+
+    </div>
+    <div class="footer__bottom">
+      <div class="container">
+        <p>© 2026 Escuelas Conectadas. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>

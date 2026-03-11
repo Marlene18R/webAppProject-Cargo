@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Formas de Apoyar — Mi Escuela Primero</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="formas-apoyar.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ========== NAVIGATION ========== -->
+  <nav class="nav" id="navbar">
+    <div class="nav__inner container">
+      <a href="index.html" class="nav__logo">
+        <div class="nav__logo-icon">
+          <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"/>
+          </svg>
+        </div>
+        <span>Mi Escuela Primero</span>
+      </a>
+      <div class="nav__links">
+        <a href="index.html" class="nav__link">Inicio</a>
+        <a href="explorar.html" class="nav__link">Explorar Escuelas</a>
+        <a href="formas-apoyar.html" class="nav__link nav__link--active">Formas de Apoyar</a>
+        <a href="donante.html" class="nav__link">Ser Donante</a>
+      </div>
+      <button class="nav__hamburger" id="hamburgerBtn" aria-label="Abrir menú" aria-expanded="false">
+        <span class="nav__hamburger-bar"></span>
+        <span class="nav__hamburger-bar"></span>
+        <span class="nav__hamburger-bar"></span>
+      </button>
+    </div>
+    <div class="nav__mobile" id="mobileMenu" aria-hidden="true">
+      <a href="index.html" class="nav__mobile-link">Inicio</a>
+      <a href="explorar.html" class="nav__mobile-link">Explorar Escuelas</a>
+      <a href="formas-apoyar.html" class="nav__mobile-link nav__mobile-link--active">Formas de Apoyar</a>
+      <a href="donante.html" class="nav__mobile-link">Ser Donante</a>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- ========== PAGE HEADER ========== -->
+    <div class="fa-header container">
+      <h1 class="fa-header__title">Formas de Apoyar y Secciones de Impacto</h1>
+      <p class="fa-header__subtitle">Cada aporte, grande o pequeño, construye educación digna.</p>
+    </div>
+
+    <!-- ========== HERO BANNER ========== -->
+    <section class="fa-hero">
+      <img
+        src="https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=1600&q=80"
+        alt="Comunidad educativa"
+        class="fa-hero__image"
+        loading="eager"
+      />
+      <div class="fa-hero__overlay" aria-hidden="true"></div>
+      <div class="fa-hero__text">
+        <h2>Cada aporte transforma una historia.</h2>
+      </div>
+    </section>
+
+    <!-- ========== QUICK NAV ========== -->
+    <section class="fa-quicknav">
+      <div class="container">
+        <div class="fa-quicknav__header">
+          <h2 class="fa-quicknav__title">Explora las secciones de apoyo</h2>
+          <p class="fa-quicknav__subtitle">Selecciona una categoría para conocer más detalles</p>
+        </div>
+        <div class="fa-quicknav__grid" id="quickNavGrid">
+          <!-- Injected by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== CATEGORIES GRID ========== -->
+    <section class="fa-categories">
+      <div class="container">
+        <div class="fa-categories__grid" id="categoriesGrid">
+          <!-- Injected by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== BOTTOM CTA ========== -->
+    <section class="fa-cta">
+      <div class="container">
+        <div class="fa-cta__card">
+          <svg class="fa-cta__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M11 14H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v5"/>
+            <path d="M21 11.5a2.5 2.5 0 0 1 0 5h-.5"/>
+            <path d="M18 11h1a2 2 0 1 1 0 4h-1"/>
+            <path d="m14 17.5 4-1.5V11l-4-1.5A1.5 1.5 0 0 0 12.5 11v5A1.5 1.5 0 0 0 14 17.5z"/>
+          </svg>
+          <h2 class="fa-cta__title">¿Listo para hacer la diferencia?</h2>
+          <p class="fa-cta__desc">
+            Cada contribución suma. Contáctanos para saber cómo tu apoyo puede transformar una escuela.
+          </p>
+          <a href="donante.html" class="btn btn--primary btn--lg">Quiero Contribuir</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="main.js"></script>
+  <script src="formas-apoyar.js"></script>
+</body>
+</html>
