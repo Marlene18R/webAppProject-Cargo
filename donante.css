@@ -1,0 +1,349 @@
+/* ============================================================
+   MI ESCUELA PRIMERO — donante.css
+   Donor / letter-form page styles
+   ============================================================ */
+
+/* ── PAGE ────────────────────────────────────────────────── */
+.donor-main {
+  min-height: calc(100vh - var(--nav-height));
+  background-color: var(--color-bg);
+  padding-block: var(--space-12) var(--space-20);
+}
+
+.donor-container {
+  max-width: 820px;
+}
+
+/* ── HEADER ──────────────────────────────────────────────── */
+.donor-header {
+  text-align: center;
+  margin-bottom: var(--space-10);
+}
+
+.donor-header__icon {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-full);
+  background-color: rgba(13, 91, 37, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto var(--space-5);
+}
+
+.donor-header__icon svg {
+  width: 30px;
+  height: 30px;
+  color: var(--color-primary);
+}
+
+.donor-header__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.875rem, 4vw, 2.5rem);
+  font-weight: 700;
+  color: var(--color-fg);
+  margin-bottom: var(--space-3);
+  line-height: 1.15;
+}
+
+.donor-header__subtitle {
+  font-size: 1.0625rem;
+  color: var(--color-fg-muted);
+  max-width: 560px;
+  margin-inline: auto;
+  line-height: 1.7;
+}
+
+/* ── CARD ────────────────────────────────────────────────── */
+.donor-card {
+  background-color: var(--color-bg-white);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-lg);
+  padding: var(--space-10) var(--space-8);
+}
+
+@media (min-width: 640px) {
+  .donor-card { padding: var(--space-12) clamp(var(--space-8), 6vw, var(--space-16)); }
+}
+
+/* ── LETTER BODY ─────────────────────────────────────────── */
+.letter-body {
+  background: linear-gradient(135deg, rgba(254,243,199,0.35) 0%, rgba(254,243,199,0.12) 100%);
+  border: 2px solid rgba(251,191,36,0.3);
+  border-radius: var(--radius-xl);
+  padding: var(--space-8) var(--space-8);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  margin-bottom: var(--space-8);
+}
+
+@media (min-width: 640px) {
+  .letter-body { padding: var(--space-10); }
+}
+
+/* Letter lines — inline prose with embedded inputs */
+.letter-line {
+  font-size: clamp(1rem, 2vw, 1.125rem);
+  color: rgba(30, 41, 59, 0.88);
+  line-height: 2.2;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.letter-line--block {
+  margin-bottom: var(--space-2);
+}
+
+/* Field wrapper keeps input inline + sized */
+.letter-field-wrap {
+  display: inline-flex;
+  align-items: center;
+  min-width: 160px;
+  flex-shrink: 0;
+}
+
+.letter-field-wrap--lg  { min-width: 220px; }
+.letter-field-wrap--xl  { min-width: 280px; }
+.letter-field-wrap--select { position: relative; }
+
+/* Inline text input — underline only */
+.letter-input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid rgba(13, 91, 37, 0.28);
+  border-radius: 0;
+  padding: 0.2rem 0.4rem;
+  font-family: var(--font-body);
+  font-size: inherit;
+  font-weight: 500;
+  color: var(--color-fg);
+  outline: none;
+  transition: border-color var(--transition-fast);
+  min-width: 140px;
+}
+
+.letter-input::placeholder {
+  color: var(--color-fg-faint);
+  font-weight: 400;
+  font-style: italic;
+}
+
+.letter-input:focus {
+  border-bottom-color: var(--color-primary);
+}
+
+.letter-input.is-filled {
+  border-bottom-color: var(--color-primary);
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+/* Inline select — underline only */
+.letter-select {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid rgba(13, 91, 37, 0.28);
+  border-radius: 0;
+  padding: 0.2rem 1.75rem 0.2rem 0.4rem;
+  font-family: var(--font-body);
+  font-size: inherit;
+  font-weight: 500;
+  color: var(--color-fg-faint);
+  appearance: none;
+  -webkit-appearance: none;
+  outline: none;
+  cursor: pointer;
+  transition: border-color var(--transition-fast), color var(--transition-fast);
+}
+
+.letter-select:focus {
+  border-bottom-color: var(--color-primary);
+}
+
+.letter-select.is-filled {
+  color: var(--color-primary);
+  font-weight: 600;
+  border-bottom-color: var(--color-primary);
+}
+
+.letter-select-caret {
+  position: absolute;
+  right: 2px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 14px;
+  height: 14px;
+  color: var(--color-fg-muted);
+  pointer-events: none;
+}
+
+/* Textarea */
+.letter-notes {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding-top: var(--space-2);
+}
+
+.letter-textarea {
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  background-color: rgba(255, 255, 255, 0.6);
+  border: 1.5px solid rgba(13, 91, 37, 0.2);
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  color: var(--color-fg);
+  resize: vertical;
+  min-height: 90px;
+  outline: none;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  line-height: 1.6;
+}
+
+.letter-textarea::placeholder { color: var(--color-fg-faint); font-style: italic; }
+
+.letter-textarea:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(13, 91, 37, 0.08);
+  background-color: #fff;
+}
+
+/* ── SUBMIT AREA ─────────────────────────────────────────── */
+.donor-submit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.donor-submit__btn {
+  min-width: 220px;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.donor-submit__btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+.donor-submit__btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.donor-submit__note {
+  font-size: 0.8125rem;
+  color: var(--color-fg-muted);
+  text-align: center;
+  max-width: 420px;
+  line-height: 1.5;
+}
+
+/* ── SUCCESS STATE ───────────────────────────────────────── */
+.donor-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding-block: var(--space-8);
+  gap: var(--space-5);
+}
+
+.donor-success__icon {
+  width: 80px;
+  height: 80px;
+  border-radius: var(--radius-full);
+  background-color: #dcfce7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: pop-in 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+.donor-success__icon svg {
+  width: 40px;
+  height: 40px;
+  color: #16a34a;
+  stroke-width: 2.5;
+}
+
+.donor-success__title {
+  font-family: var(--font-display);
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: var(--color-fg);
+}
+
+.donor-success__message {
+  font-size: 1.0625rem;
+  color: var(--color-fg-muted);
+  max-width: 460px;
+  line-height: 1.7;
+}
+
+@keyframes pop-in {
+  from { transform: scale(0.5); opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
+}
+
+/* ── HIDDEN ──────────────────────────────────────────────── */
+.hidden { display: none !important; }
+
+/* ── SCHOOL / CATEGORY CONTEXT BANNER ───────────────────── */
+.context-banner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  background-color: rgba(13, 91, 37, 0.06);
+  border: 1.5px solid rgba(13, 91, 37, 0.15);
+  border-radius: var(--radius-lg);
+  padding: var(--space-3) var(--space-5);
+  margin-bottom: var(--space-6);
+  font-size: 0.9375rem;
+  color: var(--color-fg);
+}
+
+.context-banner svg {
+  width: 18px;
+  height: 18px;
+  color: var(--color-primary);
+  flex-shrink: 0;
+}
+
+.context-banner strong {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+/* ── RESPONSIVE ──────────────────────────────────────────── */
+@media (max-width: 639px) {
+  .letter-line {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-2);
+    line-height: 1.5;
+  }
+
+  .letter-field-wrap,
+  .letter-field-wrap--lg,
+  .letter-field-wrap--xl {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .letter-input,
+  .letter-select {
+    width: 100%;
+  }
+}

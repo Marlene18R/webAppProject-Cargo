@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ser Donante — Mi Escuela Primero</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="donante.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ========== NAVIGATION ========== -->
+  <nav class="nav" id="navbar">
+    <div class="nav__inner container">
+      <a href="index.html" class="nav__logo">
+        <div class="nav__logo-icon">
+          <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"/>
+          </svg>
+        </div>
+        <span>Mi Escuela Primero</span>
+      </a>
+      <div class="nav__links">
+        <a href="index.html" class="nav__link">Inicio</a>
+        <a href="explorar.html" class="nav__link">Explorar Escuelas</a>
+        <a href="formas-apoyar.html" class="nav__link">Formas de Apoyar</a>
+        <a href="donante.html" class="nav__link nav__link--active">Ser Donante</a>
+      </div>
+      <button class="nav__hamburger" id="hamburgerBtn" aria-label="Abrir menú" aria-expanded="false">
+        <span class="nav__hamburger-bar"></span>
+        <span class="nav__hamburger-bar"></span>
+        <span class="nav__hamburger-bar"></span>
+      </button>
+    </div>
+    <div class="nav__mobile" id="mobileMenu" aria-hidden="true">
+      <a href="index.html" class="nav__mobile-link">Inicio</a>
+      <a href="explorar.html" class="nav__mobile-link">Explorar Escuelas</a>
+      <a href="formas-apoyar.html" class="nav__mobile-link">Formas de Apoyar</a>
+      <a href="donante.html" class="nav__mobile-link nav__mobile-link--active">Ser Donante</a>
+    </div>
+  </nav>
+
+  <main class="donor-main">
+    <div class="container donor-container">
+
+      <!-- ========== HEADER ========== -->
+      <header class="donor-header">
+        <div class="donor-header__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+          </svg>
+        </div>
+        <h1 class="donor-header__title">Quiero ser parte del cambio</h1>
+        <p class="donor-header__subtitle">
+          Cada alianza comienza con una intención. Cuéntanos cómo te gustaría sumar tu energía a una escuela que lo necesita.
+        </p>
+      </header>
+
+      <!-- ========== FORM CARD ========== -->
+      <div class="donor-card" id="donorCard">
+
+        <!-- ── FORM STATE ── -->
+        <div id="formState">
+          <form id="donorForm" novalidate>
+
+            <div class="letter-body">
+
+              <!-- Line 1: nombre -->
+              <p class="letter-line">
+                Hola, mi nombre es
+                <span class="letter-field-wrap">
+                  <input
+                    class="letter-input"
+                    id="nombreContacto"
+                    type="text"
+                    placeholder="tu nombre"
+                    autocomplete="name"
+                    required
+                  />
+                </span>
+              </p>
+
+              <!-- Line 2: institución + municipio -->
+              <p class="letter-line">
+                y formo parte de
+                <span class="letter-field-wrap letter-field-wrap--lg">
+                  <input
+                    class="letter-input"
+                    id="nombreInstitucion"
+                    type="text"
+                    placeholder="nombre de la institución"
+                    autocomplete="organization"
+                    required
+                  />
+                </span>
+                , ubicada en
+                <span class="letter-field-wrap letter-field-wrap--select">
+                  <select class="letter-select" id="municipio" required>
+                    <option value="" disabled selected>municipio de Jalisco</option>
+                    <option>Guadalajara</option>
+                    <option>Zapopan</option>
+                    <option>Tlaquepaque</option>
+                    <option>Tonalá</option>
+                    <option>Tlajomulco de Zúñiga</option>
+                    <option>El Salto</option>
+                    <option>Puerto Vallarta</option>
+                    <option>Lagos de Moreno</option>
+                    <option>Tepatitlán de Morelos</option>
+                    <option>Ocotlán</option>
+                    <option>Otro</option>
+                  </select>
+                  <svg class="letter-select-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+                </span>.
+              </p>
+
+              <!-- Line 3: tipo institución -->
+              <p class="letter-line">
+                Represento a
+                <span class="letter-field-wrap letter-field-wrap--select letter-field-wrap--xl">
+                  <select class="letter-select" id="tipoInstitucion" required>
+                    <option value="" disabled selected>tipo de institución</option>
+                    <option>Academia (universidad, educación media superior)</option>
+                    <option>Escuela de educación básica</option>
+                    <option>Empresa</option>
+                    <option>Gobierno estatal</option>
+                    <option>Gobierno municipal</option>
+                    <option>Organización de la sociedad civil</option>
+                    <option>Comunidad o sociedad en general</option>
+                    <option>Otro</option>
+                  </select>
+                  <svg class="letter-select-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+                </span>
+              </p>
+
+              <!-- Line 4: forma participación -->
+              <p class="letter-line">
+                y me encantaría sumarme a Mi Escuela Primero como
+                <span class="letter-field-wrap letter-field-wrap--select letter-field-wrap--xl">
+                  <select class="letter-select" id="formaParticipacion" required>
+                    <option value="" disabled selected>forma de participación</option>
+                    <option>Como aliado/a (apoyar a la escuela a solventar sus necesidades)</option>
+                    <option>Como líder comunitario (ayudar a vincular a MPJ con escuelas y aliados)</option>
+                    <option>Como voluntario (ayudar a MPJ en la operación del modelo)</option>
+                  </select>
+                  <svg class="letter-select-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+                </span>.
+              </p>
+
+              <!-- Line 5: teléfono + correo -->
+              <p class="letter-line">
+                Pueden contactarme al
+                <span class="letter-field-wrap">
+                  <input
+                    class="letter-input"
+                    id="telefono"
+                    type="tel"
+                    placeholder="teléfono"
+                    autocomplete="tel"
+                    required
+                  />
+                </span>
+                o al correo
+                <span class="letter-field-wrap letter-field-wrap--lg">
+                  <input
+                    class="letter-input"
+                    id="correo"
+                    type="email"
+                    placeholder="correo electrónico"
+                    autocomplete="email"
+                    required
+                  />
+                </span>.
+              </p>
+
+              <!-- Line 6: notas adicionales -->
+              <div class="letter-notes">
+                <p class="letter-line letter-line--block">Me gustaría compartir algo más:</p>
+                <textarea
+                  class="letter-textarea"
+                  id="notasAdicionales"
+                  placeholder="Notas adicionales (opcional)"
+                  rows="3"
+                ></textarea>
+              </div>
+
+            </div><!-- /letter-body -->
+
+            <!-- Submit -->
+            <div class="donor-submit">
+              <button class="btn btn--primary btn--lg donor-submit__btn" type="submit" id="submitBtn" disabled>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                </svg>
+                Quiero sumarme
+              </button>
+              <p class="donor-submit__note">
+                Tu información será utilizada únicamente para contactarte y coordinar tu participación.
+              </p>
+            </div>
+
+          </form>
+        </div><!-- /formState -->
+
+        <!-- ── SUCCESS STATE ── -->
+        <div id="successState" class="donor-success hidden">
+          <div class="donor-success__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+          </div>
+          <h2 class="donor-success__title">¡Gracias, <span id="successName"></span>!</h2>
+          <p class="donor-success__message">
+            Tu carta de intención ha sido recibida. Nos pondremos en contacto contigo pronto para discutir cómo puedes generar un impacto.
+          </p>
+          <a href="explorar.html" class="btn btn--primary btn--lg">Explorar más escuelas</a>
+        </div>
+
+      </div><!-- /donor-card -->
+
+    </div>
+  </main>
+
+  <script src="main.js"></script>
+  <script src="donante.js"></script>
+</body>
+</html>
