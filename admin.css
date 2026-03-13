@@ -1,15 +1,10 @@
-/* ============================================================
-   MI ESCUELA PRIMERO — admin.css  (v3 — matches new mockup)
-   ============================================================ */
-
-/* ── LOGIN PAGE ────────────────────────────────────────────── */
 .login-page {
   min-height: 100vh;
   background: linear-gradient(135deg, rgba(13,91,37,0.05) 0%, var(--color-bg) 50%, rgba(13,91,37,0.08) 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: var(--space-6);
+  padding: var(--space-8) var(--space-5);
 }
 
 .login-wrap {
@@ -60,7 +55,7 @@
   background-color: var(--color-bg-white);
   border: 2px solid var(--color-border);
   border-radius: var(--radius-xl);
-  padding: var(--space-7);
+  padding: var(--space-6) var(--space-8);
   box-shadow: 0 4px 24px rgba(0,0,0,0.06);
   display: flex;
   flex-direction: column;
@@ -533,13 +528,13 @@
   background-color: var(--color-bg-white);
   border: 2px solid var(--color-border);
   border-radius: var(--radius-xl);
-  padding: var(--space-6);
+  padding: var(--space-8) var(--space-5);
   display: flex;
   flex-direction: column;
   gap: var(--space-5);
 }
 
-.admin-card--table { padding: var(--space-6); gap: 0; }
+.admin-card--table { padding: var(--space-8) var(--space-5); gap: 0; }
 
 .admin-card__title {
   font-size: 1.0625rem;
@@ -561,7 +556,7 @@
   background-color: var(--color-bg-white);
   border: 2px solid var(--color-border);
   border-radius: var(--radius-xl);
-  padding: var(--space-6);
+  padding: var(--space-8) var(--space-5);
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
@@ -760,7 +755,7 @@
   background-color: var(--color-bg-white);
   border: 2px solid var(--color-border);
   border-radius: var(--radius-xl);
-  padding: var(--space-6);
+  padding: var(--space-8) var(--space-5);
   text-align: center;
 }
 .stat-card__number {
@@ -848,7 +843,7 @@
   backdrop-filter: blur(3px);
   z-index: 200;
   display: flex; align-items: center; justify-content: center;
-  padding: var(--space-6);
+  padding: var(--space-8) var(--space-5);
 }
 .modal {
   background-color: var(--color-bg-white);

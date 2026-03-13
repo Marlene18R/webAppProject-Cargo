@@ -72,6 +72,7 @@
   flex-direction: column;
   gap: var(--space-5);
   margin-bottom: var(--space-8);
+  overflow: hidden;
 }
 
 @media (min-width: 640px) {
@@ -85,8 +86,10 @@
   line-height: 2.2;
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
+  align-items: baseline;
   gap: 0.35rem;
+  overflow: visible;
+  width: 100%;
 }
 
 .letter-line--block {
@@ -97,8 +100,9 @@
 .letter-field-wrap {
   display: inline-flex;
   align-items: center;
-  min-width: 160px;
-  flex-shrink: 0;
+  min-width: 120px;
+  max-width: 100%;
+  flex-shrink: 1;
 }
 
 .letter-field-wrap--lg  { min-width: 220px; }
