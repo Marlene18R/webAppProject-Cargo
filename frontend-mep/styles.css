@@ -892,6 +892,25 @@ button {
   color: rgba(255,255,255,0.4);
 }
 
+.floating-donate-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: #fb923c;
+  color: white;
+  border-radius: 60px;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  z-index: 1000;
+  font-weight: bold;
+  transition: transform 0.2s;
+}
+.floating-donate-btn:hover { transform: scale(1.05); background: #f97316; }
+.floating-donate-btn svg { width: 24px; height: 24px; }
+
 /* ── ANIMATIONS (entrance) ───────────────────────────────── */
 @media (prefers-reduced-motion: no-preference) {
   .fade-up {

@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="750" viewBox="0 0 1000 750">
+    <rect x="0" y="0" width="200" height="150" fill="#FFC0CB"/><text x="100" y="75" text-anchor="middle" dominant-baseline="middle" fill="#000000" font-size="20" font-family="Arial, sans-serif" font-weight="bold">Pink</text>
+    <rect x="200" y="0" width="200" height="150" fill="#FFB6C1"/><text x="300" y="75" text-anchor="middle" dominant-baseline="middle" fill="#000000" font-size="20" font-family="Arial, sans-serif" font-weight="bold">Light Pink</text>
+    <rect x="400" y="0" width="200" height="150" fill="#FF69B4"/><text x="500" y="75" text-anchor="middle" dominant-baseline="middle" fill="#000000" font-size="20" font-family="Arial, sans-serif" font-weight="bold">Hot Pink</text>
+    <rect x="600" y="0" width="200" height="150" fill="#FF1493"/><text x="700" y="75" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-size="20" font-family="Arial, sans-serif" font-weight="bold">Deep Pink</text>
+    <rect x="800" y="0" width="200" height="150" fill="#FF6FFF"/><text x="900" y="75" text-anchor="middle" dominant-baseline="middle" fill="#000000" font-size="20" font-family="Arial, sans-serif" font-weight="bold">Ultra Pink</text>
+    
+    <rect x="0" y="150" width="200" height="150" fill="#FC0FC0"/><text x="100" y="225" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-size="20" font-family="Arial, sans-serif" font-weight="bold">Bright Pink</text>
+    <rect x="200" y="150" width="200" height="150" fill="#FF66CC"/><text x="300" y="225" text-anchor="middle" dominant-baseline="middle" fill="#000000" font-size="20" font-family="Arial, sans-serif" font-weight="bold">Rose Pink</text>
+    <rect x="400" y="150" width="200" height="150" fill="#FBAED2"/><text x="500" y="225" text-anchor="middle" dominant-baseline="middle" fill="#000000" font-size="20" font-family="Arial, sans-serif" font-weight="bold">Lavender</text>
+    <rect x="600" y="150" width="200" height="150" fill="#FF0090"/><text x="700" y="225" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-size="20" font-family="Arial, sans-serif" font-weight="bold">Magenta</text>
+    <rect x="800" y="150" width="200" height="150" fill="#DE6FA1"/><text x="900" y="225" text-anchor="middle" dominant-baseline="middle" fill="#000000" font-size="20" font-family="Arial, sans-serif" font-weight="bold">Thulian Pink</text>
+    
+    <rect x="0" y="300" width="200" height="150" fill="#F4C2C2"/><text x="100" y="375" text-anchor="middle" dominant-baseline="middle" fill="#000000" font-size="20" font-family="Arial, sans-serif" font-weight="bold">Baby Pink</text>
+    <rect x="200" y="300" width="200" height="150" fill="#FFB7C5"/><text x="300" y="375" text-anchor="middle" dominant-baseline="middle" fill="#000000" font-size="20" font-family="Arial, sans-serif" font-weight="bold">Cherry Blossom</text>
+    <rect x="400" y="300" width="200" height="150" fill="#E4717A"/><text x="500" y="375" text-anchor="middle" dominant-baseline="middle" fill="#000000" font-size="20" font-family="Arial, sans-serif" font-weight="bold">Candy Pink</text>
+    <rect x="600" y="300" width="200" height="150" fill="#FF91A4"/><text x="700" y="375" text-anchor="middle" dominant-baseline="middle" fill="#000000" font-size="20" font-family="Arial, sans-serif" font-weight="bold">Salmon Pink</text>
+    <rect x="800" y="300" width="200" height="150" fill="#E30B5C"/><text x="900" y="375" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-size="20" font-family="Arial, sans-serif" font-weight="bold">Raspberry</text>
+    
+    <rect x="0" y="450" width="200" height="150" fill="#E8888A"/><text x="100" y="525" text-anchor="middle" dominant-baseline="middle" fill="#000000" font-size="20" font-family="Arial, sans-serif" font-weight="bold">Strawberry</text>
+    <rect x="200" y="450" width="200" height="150" fill="#FF6EC7"/><text x="300" y="525" text-anchor="middle" dominant-baseline="middle" fill="#000000" font-size="20" font-family="Arial, sans-serif" font-weight="bold">Neon Pink</text>
+    <rect x="400" y="450" width="200" height="150" fill="#E52B50"/><text x="500" y="525" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-size="20" font-family="Arial, sans-serif" font-weight="bold">Amaranth</text>
+    <rect x="600" y="450" width="200" height="150" fill="#F9C5D5"/><text x="700" y="525" text-anchor="middle" dominant-baseline="middle" fill="#000000" font-size="20" font-family="Arial, sans-serif" font-weight="bold">Blush</text>
+    <rect x="800" y="450" width="200" height="150" fill="#FF00FF"/><text x="900" y="525" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-size="20" font-family="Arial, sans-serif" font-weight="bold">Fuchsia</text>
+    
+    <rect x="0" y="600" width="200" height="150" fill="#D57C8D"/><text x="100" y="675" text-anchor="middle" dominant-baseline="middle" fill="#000000" font-size="20" font-family="Arial, sans-serif" font-weight="bold">Coral Pink</text>
+    <rect x="200" y="600" width="200" height="150" fill="#DC143C"/><text x="300" y="675" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-size="20" font-family="Arial, sans-serif" font-weight="bold">Crimson</text>
+    <rect x="400" y="600" width="200" height="150" fill="#C32148"/><text x="500" y="675" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-size="20" font-family="Arial, sans-serif" font-weight="bold">Bright Maroon</text>
+    <rect x="600" y="600" width="200" height="150" fill="#D6A9A1"/><text x="700" y="675" text-anchor="middle" dominant-baseline="middle" fill="#000000" font-size="20" font-family="Arial, sans-serif" font-weight="bold">Dusty Rose</text>
+    <rect x="800" y="600" width="200" height="150" fill="#A94064"/><text x="900" y="675" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-size="20" font-family="Arial, sans-serif" font-weight="bold">Rouge</text>
+</svg>
