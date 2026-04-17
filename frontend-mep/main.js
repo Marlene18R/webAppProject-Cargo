@@ -80,4 +80,18 @@
     updateNavShadow();
   }
 
+    /* ── Botón flotante: latido periódico cada 5 segundos ── */
+  const floatBtn = document.querySelector('.floating-donate-btn');
+  if (floatBtn) {
+    // Latido inicial al cargar (ya lo hace el CSS, pero aseguramos)
+    floatBtn.style.animation = 'gentleBeat 1s ease-in-out';
+    // Repetir cada 5 segundos
+    setInterval(() => {
+      floatBtn.style.animation = 'none';
+      // Forzar reflow para reiniciar la animación
+      void floatBtn.offsetWidth;
+      floatBtn.style.animation = 'gentleBeat 1s ease-in-out';
+    }, 5000);
+  }
+
 })();

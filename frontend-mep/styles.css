@@ -516,6 +516,131 @@ button {
   margin-top: 2px;
 }
 
+/* ========== SECCIÓN AYUDA CON MOSAICO DE IMÁGENES ========== */
+.help-section {
+  padding: var(--space-16) 0;
+  background: linear-gradient(135deg, rgba(13,91,37,0.03) 0%, rgba(251,146,60,0.05) 100%);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.help-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-12);
+  align-items: center;
+}
+
+/* Columna izquierda (texto) */
+.help-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  font-weight: 700;
+  color: var(--color-fg);
+  margin-bottom: var(--space-4);
+}
+
+.help-description {
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: var(--color-fg-muted);
+  margin-bottom: var(--space-6);
+}
+
+.help-description strong {
+  color: var(--color-primary);
+}
+
+.help-stats {
+  display: flex;
+  gap: var(--space-8);
+  margin-bottom: var(--space-8);
+  flex-wrap: wrap;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-number {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--color-secondary);
+  line-height: 1.2;
+}
+
+.stat-label {
+  font-size: 0.875rem;
+  color: var(--color-fg-muted);
+}
+
+.help-cta {
+  margin-top: var(--space-2);
+}
+
+/* Mosaico de imágenes (1 grande arriba, 2 pequeñas abajo) */
+.help-mosaic {
+  display: grid;
+  grid-template-areas:
+    "large"
+    "small-group";
+  gap: var(--space-4);
+  max-width: 400px; /* adjust as needed */
+  margin: 0 auto; /* centers the mosaic */
+}
+
+.mosaic-large {
+  grid-area: large;
+}
+
+.mosaic-large img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
+  transition: transform 0.3s ease;
+  
+}
+
+/* Contenedor para las dos imágenes pequeñas */
+.small-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+}
+
+.mosaic-small img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
+  transition: transform 0.3s ease;
+}
+
+.mosaic-large img:hover,
+.mosaic-small img:hover {
+  transform: scale(1.02);
+}
+
+/* Ajuste responsive */
+@media (max-width: 768px) {
+  .help-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .help-stats {
+    justify-content: center;
+  }
+  .help-mosaic {
+    margin-top: var(--space-6);
+  }
+  .small-group {
+    gap: var(--space-3);
+  }
+}
 /* ── HOW IT WORKS — STEP CARDS ───────────────────────────── */
 .steps-grid {
   display: grid;
@@ -529,6 +654,22 @@ button {
 
 @media (min-width: 1024px) {
   .steps-grid { grid-template-columns: repeat(4, 1fr); }
+}
+@media (min-width: 1024px) {
+  .steps-grid--5 {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1rem;
+  }
+}
+@media (max-width: 1023px) {
+  .steps-grid--5 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 639px) {
+  .steps-grid--5 {
+    grid-template-columns: 1fr;
+  }
 }
 
 .step-card {
@@ -892,25 +1033,51 @@ button {
   color: rgba(255,255,255,0.4);
 }
 
+/* ========== BOTÓN FLOTANTE DE DONACIÓN ========== */
 .floating-donate-btn {
   position: fixed;
   bottom: 24px;
   right: 24px;
-  background: #fb923c;
+  background-color: #fb923c;
   color: white;
   border-radius: 60px;
   padding: 12px 20px;
   display: flex;
   align-items: center;
   gap: 8px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-  z-index: 1000;
+  text-decoration: none;
   font-weight: bold;
-  transition: transform 0.2s;
+  font-size: 1rem;
+  font-family: var(--font-body);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  z-index: 1000;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+  border: none;
+  cursor: pointer;
 }
-.floating-donate-btn:hover { transform: scale(1.05); background: #f97316; }
-.floating-donate-btn svg { width: 24px; height: 24px; }
 
+.floating-donate-btn:hover {
+  transform: scale(1.05);
+  background-color: #f97316;
+}
+
+.floating-donate-btn svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+
+/* Animación de latido suave (cada 5 segundos) */
+@keyframes gentleBeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
+
+.floating-donate-btn {
+  animation: gentleBeat 1s ease-in-out 2; /* dos latidos al cargar */
+}
+
+/* Luego, repetir cada 5 segundos con JS (ver más abajo) */
 /* ── ANIMATIONS (entrance) ───────────────────────────────── */
 @media (prefers-reduced-motion: no-preference) {
   .fade-up {
