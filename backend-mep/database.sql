@@ -181,3 +181,98 @@ ADD COLUMN propuesta TEXT DEFAULT NULL,
 ADD COLUMN unidad VARCHAR(30) DEFAULT NULL,
 ADD COLUMN estado VARCHAR(30) DEFAULT 'Pendiente',
 ADD COLUMN detalles TEXT DEFAULT NULL;
+
+-- =====================================================
+-- VISTAS Y STORED PROCEDURES (PROPUESTAS)
+-- =====================================================
+
+-- Vista para simplificar la obtención de propuestas por escuela
+CREATE OR REPLACE VIEW vista_propuestas_escuela AS
+SELECT 
+  nc.id_necesidad,
+  nc.nombre_necesidad AS subcategoria,
+  nc.categoria_general AS categoria,
+  nc.propuesta,
+  nc.cantidad_requerida,
+  nc.cantidad_recibida,
+  nc.unidad,
+  nc.estado,
+  nc.detalles,
+  nc.prioridad,
+  e.id_escuela,
+  e.nombre AS escuela_nombre,
+  m.nombre_municipio AS municipio
+FROM necesidad_catalogo nc
+JOIN escuela_necesidad en ON nc.id_necesidad = en.id_necesidad
+JOIN escuela e ON en.id_escuela = e.id_escuela
+JOIN municipio m ON e.id_municipio = m.id_municipio;
+
+-- SP para Agregar una Propuesta
+DELIMITER //
+CREATE PROCEDURE sp_upsert_propuesta(
+  IN p_id_escuela CHAR(36),
+  IN p_subcategoria VARCHAR(100),
+  IN p_categoria VARCHAR(60),
+  IN p_propuesta TEXT,
+  IN p_cantidad_requerida INT,
+  IN p_unidad VARCHAR(30),
+  IN p_estado VARCHAR(30),
+  IN p_detalles TEXT
+)
+BEGIN
+  DECLARE v_id_necesidad INT;
+
+  -- Insertar nueva necesidad
+  INSERT INTO necesidad_catalogo 
+    (nombre_necesidad, categoria_general, cantidad_requerida, propuesta, unidad, estado, detalles)
+  VALUES 
+    (p_subcategoria, COALESCE(p_categoria, 'General'), COALESCE(p_cantidad_requerida, 0), 
+     p_propuesta, p_unidad, COALESCE(p_estado, 'Pendiente'), p_detalles);
+
+  SET v_id_necesidad = LAST_INSERT_ID();
+
+  -- Vincular con la escuela
+  INSERT IGNORE INTO escuela_necesidad (id_escuela, id_necesidad) 
+  VALUES (p_id_escuela, v_id_necesidad);
+
+  SELECT v_id_necesidad AS id_necesidad;
+END //
+DELIMITER ;
+
+-- SP para Actualizar una Propuesta
+DELIMITER //
+CREATE PROCEDURE sp_update_propuesta(
+  IN p_id_necesidad INT,
+  IN p_subcategoria VARCHAR(100),
+  IN p_categoria VARCHAR(60),
+  IN p_propuesta TEXT,
+  IN p_cantidad_requerida INT,
+  IN p_unidad VARCHAR(30),
+  IN p_estado VARCHAR(30),
+  IN p_detalles TEXT
+)
+BEGIN
+  UPDATE necesidad_catalogo 
+  SET nombre_necesidad = COALESCE(p_subcategoria, nombre_necesidad),
+      categoria_general = COALESCE(p_categoria, categoria_general),
+      cantidad_requerida = COALESCE(p_cantidad_requerida, cantidad_requerida),
+      propuesta = COALESCE(p_propuesta, propuesta),
+      unidad = COALESCE(p_unidad, unidad),
+      estado = COALESCE(p_estado, estado),
+      detalles = COALESCE(p_detalles, detalles)
+  WHERE id_necesidad = p_id_necesidad;
+END //
+DELIMITER ;
+
+-- SP para Eliminar una Propuesta
+DELIMITER //
+CREATE PROCEDURE sp_delete_propuesta(
+  IN p_id_necesidad INT
+)
+BEGIN
+  -- Eliminar la relación (se hace por CASCADE, pero explícito por claridad)
+  DELETE FROM escuela_necesidad WHERE id_necesidad = p_id_necesidad;
+  -- Eliminar la necesidad
+  DELETE FROM necesidad_catalogo WHERE id_necesidad = p_id_necesidad;
+END //
+DELIMITER ;

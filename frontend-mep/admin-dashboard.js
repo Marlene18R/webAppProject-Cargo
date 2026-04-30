@@ -102,13 +102,13 @@
     // Forzar re-renderizado de todas las secciones
     renderDashboard();
     renderEscuelas();
-    renderNecesidades();
+    renderPropuestas();
     renderSolicitudes();
   }
 
   /* ── SECTION NAVIGATION (sin cambios) ── */
-  const titleMap = { dashboard: 'Dashboard', escuelas: 'Gestión de Escuelas', 'school-form': 'Gestión de Escuelas', necesidades: 'Necesidades', solicitudes: 'Solicitudes' };
-  const allSections = ['dashboard', 'escuelas', 'school-form', 'necesidades', 'solicitudes'];
+  const titleMap = { dashboard: 'Dashboard', escuelas: 'Gestión de Escuelas', 'school-form': 'Gestión de Escuelas', propuestas: 'Propuestas', solicitudes: 'Solicitudes' };
+  const allSections = ['dashboard', 'escuelas', 'school-form', 'propuestas', 'solicitudes'];
 
   function showSection(name) {
     allSections.forEach(s => {
@@ -121,7 +121,7 @@
     });
     if (name === 'dashboard') renderDashboard();
     if (name === 'escuelas') renderEscuelas();
-    if (name === 'necesidades') renderNecesidades();
+    if (name === 'propuestas') renderPropuestas();
     if (name === 'solicitudes') renderSolicitudes();
   }
 
@@ -169,16 +169,16 @@
     `).join('');
   }
 
-  
+
 
   function metricCard(label, value, iconSvg, trend) {
     return `<div class="metric-card"><div class="metric-card__left"><div class="metric-card__label">${label}</div><div class="metric-card__value">${value}</div><div class="metric-card__trend">${trendArrow()}${trend}</div></div><div class="metric-card__icon">${iconSvg}</div></div>`;
   }
   function trendArrow() { return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>'; }
   function schoolIcon() { return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>'; }
-  function listIcon()   { return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>'; }
-  function docIcon()    { return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>'; }
-  function usersIcon()  { return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>'; }
+  function listIcon() { return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>'; }
+  function docIcon() { return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>'; }
+  function usersIcon() { return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>'; }
 
   /* ── ESCUELAS TABLE (renderizado, sin cambios de estructura) ── */
   function renderEscuelas() {
@@ -216,7 +216,7 @@
     if (p >= 50) return '<span class="tbl-badge tbl-badge--orange">En progreso</span>';
     return '<span class="tbl-badge tbl-badge--gray">Iniciando</span>';
   }
-  function editIcon()  { return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>'; }
+  function editIcon() { return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>'; }
   function trashIcon() { return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>'; }
 
   /* Search */
@@ -417,27 +417,156 @@
     }
   });
 
-  /* ── NECESIDADES (renderizado) ── */
-  function renderNecesidades() {
-    const container = document.getElementById('necesidadesContent');
-    if (!schools.length) {
-      container.innerHTML = '<p style="color:var(--color-fg-muted)">No hay escuelas registradas.</p>';
+  /* ── PROPUESTAS (CRUD & UI) ── */
+  let currentPropuestas = [];
+  let editingPropuestaId = null;
+
+  async function renderPropuestas() {
+    const schoolSelect = document.getElementById('propuestaSchoolSelect');
+
+    // Populate select if empty
+    if (schoolSelect.options.length <= 1) {
+      schoolSelect.innerHTML = '<option value="">-- Selecciona una escuela --</option>' +
+        schools.map(s => `<option value="${s.id}">${s.name}</option>`).join('');
+    }
+
+    const schoolId = schoolSelect.value;
+    const addBtn = document.getElementById('addPropuestaBtn');
+    const tbody = document.getElementById('propuestasTableBody');
+    const emptyMsg = document.getElementById('propuestasEmpty');
+
+    if (!schoolId) {
+      addBtn.disabled = true;
+      tbody.innerHTML = '';
+      emptyMsg.classList.remove('hidden');
       return;
     }
-    container.innerHTML = schools.map(school => `
-      <div class="needs-school-card">
-        <div class="needs-school-card__header">
-          <div><div class="needs-school-card__name">${school.name}</div><div class="needs-school-card__county">${school.county || ''}</div></div>
-          <button class="btn btn--outline-neutral" style="padding:0.375rem 0.875rem;font-size:0.8125rem" data-edit-school="${school.id}">Editar necesidades</button>
-        </div>
-        <div class="needs-tags">
-          ${(school.needs && school.needs.length) ? school.needs.map(n => `<span class="needs-tag">${n}</span>`).join('') : '<span style="font-size:0.875rem;color:var(--color-fg-muted)">Sin necesidades registradas</span>'}
-        </div>
-      </div>
-    `).join('');
-    container.querySelectorAll('[data-edit-school]').forEach(btn => {
-      btn.addEventListener('click', () => openEditForm(btn.dataset.editSchool));
-    });
+
+    addBtn.disabled = false;
+    emptyMsg.classList.add('hidden');
+
+    try {
+      const res = await fetchWithAuth(`${API_URL}/schools/${schoolId}/propuestas`);
+      currentPropuestas = await res.json();
+
+      if (currentPropuestas.length === 0) {
+        tbody.innerHTML = '';
+        emptyMsg.textContent = 'Esta escuela no tiene propuestas registradas.';
+        emptyMsg.classList.remove('hidden');
+        return;
+      }
+
+      tbody.innerHTML = currentPropuestas.map(p => `
+        <tr>
+          <td>${p.categoria || '-'}</td>
+          <td><strong>${p.subcategoria}</strong></td>
+          <td>${p.propuesta || '-'}</td>
+          <td>${p.cantidad_requerida || 0}</td>
+          <td>${p.unidad || '-'}</td>
+          <td><span class="tbl-badge tbl-badge--${p.estado === 'Cubierto' ? 'green' : p.estado === 'Cubierto parcialmente' ? 'orange' : 'gray'}">${p.estado}</span></td>
+          <td>
+            <div class="tbl-actions">
+              <button class="tbl-btn" data-edit-prop="${p.id_necesidad}" title="Editar">${editIcon()}</button>
+              <button class="tbl-btn tbl-btn--danger" data-del-prop="${p.id_necesidad}" title="Eliminar">${trashIcon()}</button>
+            </div>
+          </td>
+        </tr>
+      `).join('');
+
+      // Add event listeners for edit and delete buttons
+      document.querySelectorAll('[data-edit-prop]').forEach(btn => {
+        btn.addEventListener('click', () => openPropuestaModal(btn.dataset.editProp));
+      });
+      document.querySelectorAll('[data-del-prop]').forEach(btn => {
+        btn.addEventListener('click', () => deletePropuesta(btn.dataset.delProp));
+      });
+
+    } catch (err) {
+      showToast('Error al cargar propuestas');
+      console.error(err);
+    }
+  }
+
+  // Event listener for school selection change
+  document.getElementById('propuestaSchoolSelect').addEventListener('change', renderPropuestas);
+
+  // Modal logic
+  const propModal = document.getElementById('propuestaModal');
+  const propForm = document.getElementById('propuestaForm');
+
+  document.getElementById('addPropuestaBtn').addEventListener('click', () => {
+    openPropuestaModal(null);
+  });
+
+  document.getElementById('closePropuestaModalBtn').addEventListener('click', () => propModal.classList.add('hidden'));
+  document.getElementById('cancelPropuestaBtn').addEventListener('click', () => propModal.classList.add('hidden'));
+
+  function openPropuestaModal(id) {
+    editingPropuestaId = id;
+    propForm.reset();
+
+    if (id) {
+      document.getElementById('propuestaModalTitle').textContent = 'Editar Propuesta';
+      const prop = currentPropuestas.find(p => p.id_necesidad == id);
+      if (prop) {
+        document.getElementById('prop-subcategoria').value = prop.subcategoria || '';
+        document.getElementById('prop-categoria').value = prop.categoria || '';
+        document.getElementById('prop-propuesta').value = prop.propuesta || '';
+        document.getElementById('prop-cantidad').value = prop.cantidad_requerida || 0;
+        document.getElementById('prop-unidad').value = prop.unidad || '';
+        document.getElementById('prop-estado').value = prop.estado || 'Pendiente';
+        document.getElementById('prop-detalles').value = prop.detalles || '';
+      }
+    } else {
+      document.getElementById('propuestaModalTitle').textContent = 'Agregar Propuesta';
+    }
+
+    propModal.classList.remove('hidden');
+  }
+
+  propForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const schoolId = document.getElementById('propuestaSchoolSelect').value;
+    if (!schoolId) return;
+
+    const data = {
+      subcategoria: document.getElementById('prop-subcategoria').value.trim(),
+      categoria: document.getElementById('prop-categoria').value.trim(),
+      propuesta: document.getElementById('prop-propuesta').value.trim(),
+      cantidad_requerida: Number(document.getElementById('prop-cantidad').value) || 0,
+      unidad: document.getElementById('prop-unidad').value.trim(),
+      estado: document.getElementById('prop-estado').value,
+      detalles: document.getElementById('prop-detalles').value.trim()
+    };
+
+    try {
+      const url = editingPropuestaId
+        ? `${API_URL}/schools/${schoolId}/propuestas/${editingPropuestaId}`
+        : `${API_URL}/schools/${schoolId}/propuestas`;
+      const method = editingPropuestaId ? 'PUT' : 'POST';
+
+      const res = await fetchWithAuth(url, { method, body: JSON.stringify(data) });
+      if (!res.ok) throw new Error(await res.text());
+
+      showToast(editingPropuestaId ? 'Propuesta actualizada' : 'Propuesta agregada');
+      propModal.classList.add('hidden');
+      renderPropuestas(); // reload table
+    } catch (err) {
+      showToast('Error: ' + err.message);
+    }
+  });
+
+  async function deletePropuesta(id) {
+    if (!confirm('¿Estás seguro de eliminar esta propuesta?')) return;
+    const schoolId = document.getElementById('propuestaSchoolSelect').value;
+    try {
+      const res = await fetchWithAuth(`${API_URL}/schools/${schoolId}/propuestas/${id}`, { method: 'DELETE' });
+      if (!res.ok) throw new Error('Error al eliminar');
+      showToast('Propuesta eliminada');
+      renderPropuestas();
+    } catch (err) {
+      showToast('Error: ' + err.message);
+    }
   }
 
   /* ── SOLICITUDES (renderizado + eliminar) ── */
@@ -544,10 +673,12 @@
         if (typeof loadAllData === 'function') {
           await loadAllData();
         } else {
-          // Recargar escuelas y necesidades manualmente
+          // Recargar escuelas y propuestas manualmente
           await loadSchools();
           renderEscuelas();
-          renderNecesidades();
+          if (document.getElementById('section-propuestas').classList.contains('hidden') === false) {
+            renderPropuestas();
+          }
         }
       } catch (error) {
         console.error(error);
