@@ -137,7 +137,7 @@ const importExcel = async (req, res) => {
           const newId = crypto.randomUUID();
           await pool.query(
             `INSERT INTO escuela (id_escuela, nombre, id_municipio, num_estudiantes, num_maestros, descripcion)
-             VALUES (?, ?, ?, 0, 0, 'Importado desde Excel')`,
+             VALUES (?, ?, ?, 0, 0, '')`,
             [newId, escuelaNombre, idMunicipio]
           );
           idEscuela = newId;
