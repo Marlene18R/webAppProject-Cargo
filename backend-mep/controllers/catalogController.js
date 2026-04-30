@@ -90,7 +90,7 @@ const importExcel = async (req, res) => {
   try {
     const workbook = xlsx.readFile(req.file.path);
     const sheet = workbook.Sheets[workbook.SheetNames[0]];
-    const rows = xlsx.utils.sheet_to_json(sheet);
+    const rows = xlsx.utils.sheet_to_json(sheet, { raw: false, defval: '' });
 
     let imported = 0;
     let errors = [];
@@ -236,6 +236,6 @@ module.exports = {
   getEducationalLevels,
   getDashboardStats,
   getGlobalProgress,
-  importExcel,   
-  exportNeeds     
+  importExcel,
+  exportNeeds
 };
