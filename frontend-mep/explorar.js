@@ -7,6 +7,14 @@
   'use strict';
 
   const API_URL = 'http://localhost:5000/api';
+  const SERVER_URL = 'http://localhost:5000';
+  const DEFAULT_IMG = 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=800&q=80';
+
+  function resolveImageUrl(img) {
+    if (!img) return DEFAULT_IMG;
+    if (img.startsWith('http')) return img;
+    return SERVER_URL + img; // e.g. /uploads/images/1234.jpg
+  }
 
   /* ── STATE ──────────────────────────────────────────────── */
   let schoolsData = [];           // Escuelas cargadas desde la API
@@ -92,10 +100,10 @@
         <div class="school-card__image-wrap">
           <img
             class="school-card__image"
-            src="${school.image || 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=800&q=80'}"
+            src="${resolveImageUrl(school.image)}"
             alt="${escapeHtml(school.name)}"
             loading="lazy"
-            onerror="this.src='https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=800&q=80'"
+            onerror="this.src='${DEFAULT_IMG}'"
           />
           <span class="school-card__county-badge">${escapeHtml(school.county || '')}</span>
         </div>
@@ -288,7 +296,7 @@
       }
 
       modalBody.innerHTML = `
-        <img class="modal-header-img" src="${school.image || 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=800&q=80'}" alt="${escapeHtml(school.name)}">
+        <img class="modal-header-img" src="${resolveImageUrl(school.image)}" alt="${escapeHtml(school.name)}" onerror="this.src='${DEFAULT_IMG}'">
         <div class="modal-body-content">
           <div class="modal-title-wrap">
             <h2 class="modal-title">${escapeHtml(school.name)}</h2>

@@ -19,10 +19,9 @@ const validateSchool = [
   body('county').notEmpty().withMessage('El municipio es requerido'),
   body('students').optional().isInt({ min: 0 }),
   body('teachers').optional().isInt({ min: 0 }),
-  body('fundingProgress').optional().isInt({ min: 0, max: 100 }),
-  body('materialsProgress').optional().isInt({ min: 0, max: 100 }),
-  body('volunteerHoursProgress').optional().isInt({ min: 0, max: 100 }),
-  body('needs').optional().isArray(),
+  body('fundingProgress').optional().isInt({ min: 0, max: 100 }).toInt(),
+  body('materialsProgress').optional().isInt({ min: 0, max: 100 }).toInt(),
+  body('volunteerHoursProgress').optional().isInt({ min: 0, max: 100 }).toInt(),
   body('donationTypes').optional().isArray(),
   handleValidationErrors,
 ];

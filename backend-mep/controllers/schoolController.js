@@ -232,16 +232,6 @@ const updateSchool = async (req, res) => {
       await pool.query(`UPDATE escuela SET ${fields.join(', ')} WHERE id_escuela = ?`, values);
     }
 
-    // Reemplazar necesidades
-    if (updates.needs && Array.isArray(updates.needs)) {
-      await pool.query('DELETE FROM escuela_necesidad WHERE id_escuela = ?', [id]);
-      for (const needName of updates.needs) {
-        const [needRow] = await pool.query('SELECT id_necesidad FROM necesidad_catalogo WHERE nombre_necesidad = ?', [needName]);
-        if (needRow.length) {
-          await pool.query('INSERT INTO escuela_necesidad (id_escuela, id_necesidad) VALUES (?, ?)', [id, needRow[0].id_necesidad]);
-        }
-      }
-    }
 
     // Reemplazar tipos de donación
     if (updates.donationTypes && Array.isArray(updates.donationTypes)) {
@@ -249,7 +239,7 @@ const updateSchool = async (req, res) => {
       for (const typeName of updates.donationTypes) {
         const [typeRow] = await pool.query('SELECT id_tipo_donacion FROM tipo_donacion WHERE nombre_tipo = ?', [typeName]);
         if (typeRow.length) {
-          await pool.query('INSERT INTO escuela_tipo_donacion (id_escuela, id_tipo_donacion) VALUES (?, ?)', [id, typeRow[0].id_tipo_donacion]);
+          await pool.query('INSERT IGNORE INTO escuela_tipo_donacion (id_escuela, id_tipo_donacion) VALUES (?, ?)', [id, typeRow[0].id_tipo_donacion]);
         }
       }
     }
@@ -276,10 +266,24 @@ const deleteSchool = async (req, res) => {
   }
 };
 
+// POST /api/schools/:id/image (admin)
+const uploadSchoolImage = async (req, res) => {
+  if (!req.file) return res.status(400).json({ message: 'No se subió imagen' });
+  const imageUrl = `/uploads/images/${req.file.filename}`;
+  try {
+    await pool.query('UPDATE escuela SET url_imagen = ? WHERE id_escuela = ?', [imageUrl, req.params.id]);
+    res.json({ imageUrl });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error al actualizar imagen de la escuela' });
+  }
+};
+
 module.exports = {
   getSchools,
   getSchoolById,
   createSchool,
   updateSchool,
   deleteSchool,
+  uploadSchoolImage
 };

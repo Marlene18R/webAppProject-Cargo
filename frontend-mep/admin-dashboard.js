@@ -6,6 +6,13 @@
   'use strict';
 
   const API_URL = 'http://localhost:5000/api';
+  const SERVER_URL = 'http://localhost:5000';
+
+  function resolveImageUrl(img) {
+    if (!img) return '';
+    if (img.startsWith('http')) return img;
+    return SERVER_URL + img;
+  }
 
   /* ── AUTH GUARD (nuevo token JWT) ── */
   const token = sessionStorage.getItem('mep_admin_token');
@@ -256,7 +263,7 @@
   });
 
   function openAddForm() {
-    editingId = null; needs = [];
+    editingId = null;
     document.getElementById('schoolFormTitle').textContent = 'Agregar Nueva Escuela';
     resetSchoolForm();
     showSection('school-form');
@@ -267,7 +274,6 @@
     const school = schools.find(s => s.id === id);
     if (!school) return;
     editingId = id;
-    needs = [...(school.needs || [])];
     document.getElementById('schoolFormTitle').textContent = 'Editar Escuela';
     document.getElementById('sf-name').value = school.name || '';
     document.getElementById('sf-county').value = school.county || '';
@@ -283,7 +289,7 @@
     document.getElementById('sf-materials').value = school.materialsProgress || 0;
     document.getElementById('sf-volunteer').value = school.volunteerHoursProgress || 0;
 
-    const imgUrl = school.image || '';
+    const imgUrl = resolveImageUrl(school.image);
     document.getElementById('imagePreviewWrap').style.display = imgUrl ? 'block' : 'none';
     document.getElementById('imagePreview').src = imgUrl;
 
@@ -291,7 +297,6 @@
       cb.checked = (school.donationTypes || []).includes(cb.value);
       cb.closest('.donation-type-option')?.classList.toggle('is-checked', cb.checked);
     });
-    renderNeeds();
     showSection('school-form');
     window.scrollTo(0, 0);
   }
@@ -303,46 +308,16 @@
     document.getElementById('sf-volunteer').value = 0;
     document.getElementById('imagePreviewWrap').style.display = 'none';
     document.querySelectorAll('.donation-type-option').forEach(l => l.classList.remove('is-checked'));
-    needs = [];
-    renderNeeds();
   }
 
-  /* Needs (local, solo para el formulario) */
-  function renderNeeds() {
-    const list = document.getElementById('needsList');
-    const hint = document.getElementById('needsEmptyHint');
-    hint.style.display = needs.length ? 'none' : 'block';
-    list.innerHTML = needs.map((n, i) => `
-      <span class="need-chip">${n}
-        <button type="button" class="need-chip__remove" data-idx="${i}" aria-label="Quitar ${n}">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-        </button>
-      </span>
-    `).join('');
-  }
-
-  document.getElementById('needsList').addEventListener('click', (e) => {
-    const btn = e.target.closest('[data-idx]');
-    if (!btn) return;
-    needs.splice(Number(btn.dataset.idx), 1);
-    renderNeeds();
-  });
-
-  function addNeed() {
-    const input = document.getElementById('needsInput');
-    let val = input.value.trim();
-    if (!val) return;
-    val.split(',').forEach(v => {
-      const t = v.trim();
-      if (t && !needs.includes(t)) needs.push(t);
-    });
-    input.value = '';
-    renderNeeds();
-    input.focus();
-  }
-  document.getElementById('addNeedBtn').addEventListener('click', addNeed);
-  document.getElementById('needsInput').addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') { e.preventDefault(); addNeed(); }
+  // Image file preview
+  document.getElementById('sf-image-file').addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if (file) {
+      const url = URL.createObjectURL(file);
+      document.getElementById('imagePreview').src = url;
+      document.getElementById('imagePreviewWrap').style.display = 'block';
+    }
   });
 
   /* Form submit (guarda en API) */
@@ -363,7 +338,6 @@
       description: document.getElementById('sf-description').value.trim(),
       image: document.getElementById('sf-image').value.trim() || 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=800&q=80',
       donationTypes,
-      needs: needs.slice(),
       fundingProgress: Math.min(100, Math.max(0, Number(document.getElementById('sf-funding').value))),
       materialsProgress: Math.min(100, Math.max(0, Number(document.getElementById('sf-materials').value))),
       volunteerHoursProgress: Math.min(100, Math.max(0, Number(document.getElementById('sf-volunteer').value))),
@@ -374,6 +348,28 @@
       const method = editingId ? 'PUT' : 'POST';
       const res = await fetchWithAuth(url, { method, body: JSON.stringify(data) });
       if (!res.ok) throw new Error(await res.text());
+      
+      const resData = await res.json();
+      const schoolIdResult = editingId || resData.id;
+
+      // Handle image file upload if selected
+      const imageFileInput = document.getElementById('sf-image-file');
+      if (imageFileInput.files.length > 0) {
+        const file = imageFileInput.files[0];
+        const formData = new FormData();
+        formData.append('image', file);
+        
+        const uploadRes = await fetch(`${API_URL}/schools/${schoolIdResult}/image`, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${token}` // FormData handles Content-Type implicitly for multipart
+          },
+          body: formData
+        });
+        
+        if (!uploadRes.ok) throw new Error('Escuela guardada pero falló al subir la imagen');
+      }
+
       showToast(editingId ? 'Escuela actualizada correctamente.' : 'Escuela agregada correctamente.');
       await loadAllData();  // Recargar todo
       showSection('escuelas');

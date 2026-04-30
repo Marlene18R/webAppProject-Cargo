@@ -24,6 +24,8 @@ app.use('/api/schools', schoolRoutes);
 app.use('/api/support-requests', requestRoutes);
 app.use('/api', catalogRoutes);
 
+app.use('/uploads', express.static('uploads'));
+
 app.get('/', (req, res) => {
   res.send('API de Mi Escuela Primero funcionando ');
 });
