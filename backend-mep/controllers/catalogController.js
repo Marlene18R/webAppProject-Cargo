@@ -145,19 +145,24 @@ const importExcel = async (req, res) => {
 
         // 3. Necesidad
         let idNecesidad;
-        const [nRow] = await pool.query('SELECT id_necesidad FROM necesidad_catalogo WHERE nombre_necesidad = ?', [subcategoria]);
+        const [nRow] = await pool.query(
+          `SELECT nc.id_necesidad FROM necesidad_catalogo nc
+           JOIN escuela_necesidad en ON nc.id_necesidad = en.id_necesidad
+           WHERE nc.nombre_necesidad = ? AND nc.propuesta <=> ? AND en.id_escuela = ?`,
+          [subcategoria, propuesta, idEscuela]
+        );
+
         if (nRow.length) {
           idNecesidad = nRow[0].id_necesidad;
           await pool.query(
             `UPDATE necesidad_catalogo 
              SET categoria_general = COALESCE(?, categoria_general),
-                 cantidad_requerida = GREATEST(cantidad_requerida, ?),
-                 propuesta = COALESCE(?, propuesta),
+                 cantidad_requerida = ?,
                  unidad = COALESCE(?, unidad),
                  estado = COALESCE(?, estado),
                  detalles = COALESCE(?, detalles)
              WHERE id_necesidad = ?`,
-            [categoria || 'General', cantidad, propuesta, unidad, estado, detalles, idNecesidad]
+            [categoria || 'General', cantidad, unidad, estado, detalles, idNecesidad]
           );
         } else {
           const [result] = await pool.query(
