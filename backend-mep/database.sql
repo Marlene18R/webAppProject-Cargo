@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS nivel_educativo (
 -- Tabla necesidad_catalogo (extendida)
 CREATE TABLE IF NOT EXISTS necesidad_catalogo (
     id_necesidad INT AUTO_INCREMENT PRIMARY KEY,
-    nombre_necesidad VARCHAR(100) UNIQUE NOT NULL,
+    nombre_necesidad VARCHAR(100) NOT NULL,
     categoria_general VARCHAR(60),
     cantidad_requerida INT DEFAULT 0,
     cantidad_recibida INT DEFAULT 0,
