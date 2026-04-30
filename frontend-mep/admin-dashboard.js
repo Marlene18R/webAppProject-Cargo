@@ -158,7 +158,7 @@
       metricCard('Escuelas Activas', activeSchools, schoolIcon(), '+12% vs mes anterior') +
       metricCard('Necesidades Pendientes', pendingNeeds, listIcon(), '-8% vs mes anterior') +
       metricCard('Solicitudes Recibidas', stats.solicitudesRecibidas, docIcon(), '+24% vs mes anterior') +
-      metricCard('Aliados Activos', 23, usersIcon(), '+5% vs mes anterior');
+      metricCard('Aliades Activos', 23, usersIcon(), '+5% vs mes anterior');
 
     document.getElementById('recentActivity').innerHTML = RECENT_ACTIVITY.map(a => `
       <div class="activity-item"><div class="activity-dot"></div><div><div class="activity-type">${a.type}</div><div class="activity-message">${a.message}</div><div class="activity-time">${a.time}</div></div></div>
@@ -168,6 +168,8 @@
       <div class="progress-row"><div class="progress-row__header"><span class="progress-row__name">${s.name}</span><span class="progress-row__pct">${s.fundingProgress}%</span></div><div class="progress-track"><div class="progress-fill" style="width:${s.fundingProgress}%"></div></div></div>
     `).join('');
   }
+
+  
 
   function metricCard(label, value, iconSvg, trend) {
     return `<div class="metric-card"><div class="metric-card__left"><div class="metric-card__label">${label}</div><div class="metric-card__value">${value}</div><div class="metric-card__trend">${trendArrow()}${trend}</div></div><div class="metric-card__icon">${iconSvg}</div></div>`;
@@ -493,5 +495,80 @@
     await loadAllData();
     showSection('dashboard');
   })();
+
+  // =====================================================
+  // IMPORTAR NECESIDADES DESDE EXCEL
+  // =====================================================
+  const importExcelBtn = document.getElementById('importExcelBtn');
+  const excelImportInput = document.getElementById('excelImportInput');
+
+  if (importExcelBtn && excelImportInput) {
+    importExcelBtn.addEventListener('click', () => {
+      excelImportInput.click();
+    });
+
+    excelImportInput.addEventListener('change', async (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const formData = new FormData();
+      formData.append('file', file);
+
+      const token = sessionStorage.getItem('mep_admin_token');
+      if (!token) {
+        showToast('No hay sesión activa. Inicia sesión nuevamente.');
+        return;
+      }
+
+      try {
+        showToast('Subiendo archivo...');
+        const response = await fetch(`${API_URL}/import/school-needs`, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${token}`
+          },
+          body: formData
+        });
+
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.message || 'Error al importar');
+
+        let msg = `Importación completada: ${data.imported} registros procesados.`;
+        if (data.errors && data.errors.length) {
+          msg += ` ${data.errors.length} errores (ver consola).`;
+          console.error('Errores de importación:', data.errors);
+        }
+        showToast(msg);
+
+        // Recargar datos (ajusta según las funciones que tengas)
+        if (typeof loadAllData === 'function') {
+          await loadAllData();
+        } else {
+          // Recargar escuelas y necesidades manualmente
+          await loadSchools();
+          renderEscuelas();
+          renderNecesidades();
+        }
+      } catch (error) {
+        console.error(error);
+        showToast('Error: ' + error.message);
+      } finally {
+        excelImportInput.value = ''; // limpiar input
+      }
+    });
+  }
+
+  const exportNeedsBtn = document.getElementById('exportNeedsBtn');
+  if (exportNeedsBtn) {
+    exportNeedsBtn.addEventListener('click', () => {
+      const token = sessionStorage.getItem('mep_admin_token');
+      if (!token) {
+        showToast('No hay sesión activa. Inicia sesión nuevamente.');
+        return;
+      }
+      // Redirigir al endpoint de exportación (el backend generará el archivo)
+      window.location.href = `${API_URL}/export/needs`;
+    });
+  }
 
 })();

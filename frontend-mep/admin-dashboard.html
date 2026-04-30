@@ -120,15 +120,23 @@
 
       <!-- ── ESCUELAS LIST ── -->
       <section class="admin-section hidden" id="section-escuelas">
-        <div class="admin-section__header admin-section__header--row">
+        <div class="admin-section__header admin-section__header--row" style="margin-bottom: 1rem;">
           <div>
             <h2 class="admin-section__title">Gestión de Escuelas</h2>
             <p class="admin-section__sub">Administra las escuelas registradas en la plataforma</p>
           </div>
-          <button class="btn btn--primary" id="showAddSchoolBtn">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-            Agregar Escuela
-          </button>
+          <div style="display: flex; gap: 1rem;">
+            <button class="btn btn--primary" id="showAddSchoolBtn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Agregar Escuela
+            </button>
+            <button class="btn btn--outline-neutral" id="importExcelBtn">
+              Importar necesidades (Excel)
+            </button>
+            <input type="file" id="excelImportInput" accept=".xlsx, .xls" style="display: none;" />
+
+            <button id="exportNeedsBtn" class="btn btn--outline-neutral">Exportar necesidades a Excel</button>
+          </div>
         </div>
 
         <!-- Search -->
