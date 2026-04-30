@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,8 +9,11 @@
   <link rel="stylesheet" href="explorar.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=DM+Sans:wght@400;500;600&display=swap"
+    rel="stylesheet" />
 </head>
+
 <body>
 
   <!-- ========== NAVIGATION ========== -->
@@ -18,7 +22,8 @@
       <a href="index.html" class="nav__logo">
         <div class="nav__logo-icon">
           <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-            <path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"/>
+            <path
+              d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" />
           </svg>
         </div>
         <span>Mi Escuela Primero</span>
@@ -68,8 +73,10 @@
           <div class="filters-card">
             <h3 class="filters-card__heading">
               <!-- Search icon -->
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" aria-hidden="true">
+                <circle cx="11" cy="11" r="8" />
+                <line x1="21" y1="21" x2="16.65" y2="16.65" />
               </svg>
               Filtros
             </h3>
@@ -78,16 +85,13 @@
             <div class="filter-group">
               <label class="filter-label" for="searchInput">Buscar Escuelas</label>
               <div class="filter-input-wrap">
-                <svg class="filter-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                <svg class="filter-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <circle cx="11" cy="11" r="8" />
+                  <line x1="21" y1="21" x2="16.65" y2="16.65" />
                 </svg>
-                <input
-                  class="filter-input"
-                  id="searchInput"
-                  type="search"
-                  placeholder="Nombre o ubicación..."
-                  autocomplete="off"
-                />
+                <input class="filter-input" id="searchInput" type="search" placeholder="Nombre o ubicación..."
+                  autocomplete="off" />
               </div>
             </div>
 
@@ -100,10 +104,11 @@
                   <option value="Zapopan">Zapopan</option>
                   <option value="Arandas">Arandas</option>
                   <option value="San Juan de los Lagos">San Juan de los Lagos</option>
-                  <option value="Tlaquepaque">Tlaquepaque</option>
+                  <option value="San Pedro Tlaquepaque">San Pedro Tlaquepaque</option>
                 </select>
-                <svg class="filter-select-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <polyline points="6 9 12 15 18 9"/>
+                <svg class="filter-select-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="6 9 12 15 18 9" />
                 </svg>
               </div>
             </div>
@@ -120,8 +125,9 @@
                   <option value="Talleres">Talleres</option>
                   <option value="Vinculación">Vinculación</option>
                 </select>
-                <svg class="filter-select-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <polyline points="6 9 12 15 18 9"/>
+                <svg class="filter-select-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="6 9 12 15 18 9" />
                 </svg>
               </div>
             </div>
@@ -146,15 +152,22 @@
             <div class="view-toggle" role="group" aria-label="Modo de vista">
               <button class="view-toggle__btn view-toggle__btn--active" id="gridViewBtn" aria-pressed="true">
                 <!-- Grid icon -->
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" aria-hidden="true">
+                  <rect x="3" y="3" width="7" height="7" />
+                  <rect x="14" y="3" width="7" height="7" />
+                  <rect x="3" y="14" width="7" height="7" />
+                  <rect x="14" y="14" width="7" height="7" />
                 </svg>
                 Cuadrícula
               </button>
               <button class="view-toggle__btn" id="mapViewBtn" aria-pressed="false">
                 <!-- Map icon -->
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" aria-hidden="true">
+                  <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6" />
+                  <line x1="8" y1="2" x2="8" y2="18" />
+                  <line x1="16" y1="6" x2="16" y2="22" />
                 </svg>
                 Mapa
               </button>
@@ -169,18 +182,24 @@
           <!-- ── MAP VIEW ── -->
           <div class="map-view hidden" id="mapView">
             <div class="map-placeholder">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" aria-hidden="true">
+                <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6" />
+                <line x1="8" y1="2" x2="8" y2="18" />
+                <line x1="16" y1="6" x2="16" y2="22" />
               </svg>
               <h3>Vista de Mapa</h3>
-              <p id="mapCountText">Mapa interactivo que muestra 6 escuelas en tu área seleccionada.<br>Esto mostraría una integración de mapa real en producción.</p>
+              <p id="mapCountText">Mapa interactivo que muestra 6 escuelas en tu área seleccionada.<br>Esto mostraría
+                una integración de mapa real en producción.</p>
             </div>
           </div>
 
           <!-- ── EMPTY STATE ── -->
           <div class="empty-state hidden" id="emptyState">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+              stroke-linejoin="round" aria-hidden="true">
+              <circle cx="11" cy="11" r="8" />
+              <line x1="21" y1="21" x2="16.65" y2="16.65" />
             </svg>
             <h3>No se encontraron escuelas</h3>
             <p>Intenta ajustar tus filtros para ver más resultados</p>
@@ -189,15 +208,32 @@
         </div>
       </div>
     </div>
+    <!-- ========== SCHOOL DETAIL MODAL ========== -->
+    <div class="modal-overlay" id="schoolModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-content">
+        <button class="modal-close" id="closeModalBtn" aria-label="Cerrar detalle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+        <div id="modalBody">
+          <!-- Content injected by JS -->
+          <div class="modal-loading">Cargando detalles...</div>
+        </div>
+      </div>
+    </div>
   </main>
-   <footer class="footer">
+  <footer class="footer">
     <div class="container footer__inner">
 
       <div class="footer__brand">
         <div class="footer__logo">
           <div class="footer__logo-icon">
             <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-              <path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"/>
+              <path
+                d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" />
             </svg>
           </div>
           <span>Mi Escuela Primero</span>
@@ -238,9 +274,11 @@
   <script src="explorar.js"></script>
   <a href="donante.html?origen=flotante" class="floating-donate-btn" id="floatingDonateBtn">
     <svg viewBox="0 0 24 24" fill="currentColor">
-      <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+      <path
+        d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
     </svg>
     <span>Donar</span>
   </a>
 </body>
+
 </html>
