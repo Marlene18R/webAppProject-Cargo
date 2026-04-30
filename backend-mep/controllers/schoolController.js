@@ -85,7 +85,8 @@ const getSchoolById = async (req, res) => {
     }
     const school = schoolRows[0];
     const [needsRows] = await pool.query(
-      `SELECT nc.nombre_necesidad, nc.cantidad_requerida, nc.cantidad_recibida, nc.prioridad
+      `SELECT nc.nombre_necesidad, nc.cantidad_requerida, nc.cantidad_recibida, nc.prioridad,
+              nc.propuesta, nc.unidad, nc.estado, nc.detalles
        FROM escuela_necesidad en
        JOIN necesidad_catalogo nc ON en.id_necesidad = nc.id_necesidad
        WHERE en.id_escuela = ?`,
