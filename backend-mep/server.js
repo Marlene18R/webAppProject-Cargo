@@ -25,7 +25,7 @@ app.use('/api/support-requests', requestRoutes);
 app.use('/api', catalogRoutes);
 
 app.get('/', (req, res) => {
-  res.send('API de Mi Escuela Primero funcionando ✅');
+  res.send('API de Mi Escuela Primero funcionando ');
 });
 
 app.use((req, res) => {

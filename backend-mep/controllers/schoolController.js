@@ -124,19 +124,33 @@ const getSchoolById = async (req, res) => {
 
 // POST /api/schools (admin)
 const createSchool = async (req, res) => {
+
+  try {
   const {
     name, county, nivel, students, teachers, phone, email, address,
     description, image, fundingProgress, materialsProgress, volunteerHoursProgress,
     needs = [], donationTypes = [], nivelCondicion = 'Mínimo'
   } = req.body;
 
-  try {
+  
     // Obtener id_municipio
     const [municipioRows] = await pool.query('SELECT id_municipio FROM municipio WHERE nombre_municipio = ?', [county]);
     if (municipioRows.length === 0) {
       return res.status(400).json({ message: 'Municipio no válido' });
     }
     const id_municipio = municipioRows[0].id_municipio;
+
+    // Dentro de createSchool, después de obtener id_municipio
+  const [existing] = await pool.query(
+    'SELECT id_escuela FROM escuela WHERE nombre = ? AND id_municipio = ?',
+    [name, id_municipio]
+  );
+  if (existing.length) {
+    return res.status(409).json({ 
+      message: 'Ya existe una escuela con el mismo nombre en este municipio',
+      existingId: existing[0].id_escuela
+    });
+  }
 
     // Obtener id_nivel
     let id_nivel = null;
