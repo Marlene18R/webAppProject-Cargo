@@ -181,3 +181,403 @@ ADD COLUMN propuesta TEXT DEFAULT NULL,
 ADD COLUMN unidad VARCHAR(30) DEFAULT NULL,
 ADD COLUMN estado VARCHAR(30) DEFAULT 'Pendiente',
 ADD COLUMN detalles TEXT DEFAULT NULL;
+
+--SPs, Views y Triggers
+DELIMITER $$
+
+DROP PROCEDURE IF EXISTS sp_crear_escuela$$
+CREATE PROCEDURE sp_crear_escuela(
+    IN p_id_escuela CHAR(36),
+    IN p_nombre VARCHAR(150),
+    IN p_id_municipio INT,
+    IN p_id_nivel INT,
+    IN p_num_estudiantes INT,
+    IN p_num_maestros INT,
+    IN p_telefono VARCHAR(20),
+    IN p_email VARCHAR(100),
+    IN p_direccion TEXT,
+    IN p_descripcion TEXT,
+    IN p_url_imagen TEXT,
+    IN p_prog_financ INT,
+    IN p_prog_mat INT,
+    IN p_prog_vol INT,
+    IN p_nivel_condicion VARCHAR(30),
+    IN p_necesidades TEXT,   
+    IN p_tipos_donacion TEXT    
+)
+BEGIN
+    DECLARE v_id_necesidad INT DEFAULT NULL;
+    DECLARE v_id_tipo INT DEFAULT NULL;
+    DECLARE v_need_name VARCHAR(150);
+    DECLARE v_type_name VARCHAR(150);
+    DECLARE v_pos INT;
+    DECLARE v_rem_n TEXT;
+    DECLARE v_rem_t TEXT;
+
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        ROLLBACK;
+        RESIGNAL;
+    END;
+
+    START TRANSACTION;
+
+    IF EXISTS (
+        SELECT 1 FROM escuela
+        WHERE nombre = p_nombre AND id_municipio = p_id_municipio
+    ) THEN
+        SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'Ya existe una escuela con ese nombre en este municipio';
+    END IF;
+
+    INSERT INTO escuela (
+        id_escuela, nombre, id_municipio, id_nivel,
+        num_estudiantes, num_maestros, telefono, email,
+        direccion, descripcion, url_imagen,
+        progreso_financiamiento, progreso_materiales, progreso_voluntariado,
+        nivel_condicion
+    ) VALUES (
+        p_id_escuela, p_nombre, p_id_municipio, p_id_nivel,
+        p_num_estudiantes, p_num_maestros, p_telefono, p_email,
+        p_direccion, p_descripcion, p_url_imagen,
+        p_prog_financ, p_prog_mat, p_prog_vol,
+        p_nivel_condicion
+    );
+
+    SET v_rem_n = p_necesidades;
+    WHILE LENGTH(TRIM(v_rem_n)) > 0 DO
+        SET v_pos = LOCATE(',', v_rem_n);
+        IF v_pos > 0 THEN
+            SET v_need_name = TRIM(SUBSTRING(v_rem_n, 1, v_pos - 1));
+            SET v_rem_n = TRIM(SUBSTRING(v_rem_n, v_pos + 1));
+        ELSE
+            SET v_need_name = TRIM(v_rem_n);
+            SET v_rem_n = '';
+        END IF;
+        SELECT id_necesidad INTO v_id_necesidad
+        FROM necesidad_catalogo WHERE nombre_necesidad = v_need_name LIMIT 1;
+        IF v_id_necesidad IS NOT NULL THEN
+            INSERT IGNORE INTO escuela_necesidad (id_escuela, id_necesidad)
+            VALUES (p_id_escuela, v_id_necesidad);
+        END IF;
+        SET v_id_necesidad = NULL;
+    END WHILE;
+
+
+    SET v_rem_t = p_tipos_donacion;
+    WHILE LENGTH(TRIM(v_rem_t)) > 0 DO
+        SET v_pos = LOCATE(',', v_rem_t);
+        IF v_pos > 0 THEN
+            SET v_type_name = TRIM(SUBSTRING(v_rem_t, 1, v_pos - 1));
+            SET v_rem_t = TRIM(SUBSTRING(v_rem_t, v_pos + 1));
+        ELSE
+            SET v_type_name = TRIM(v_rem_t);
+            SET v_rem_t  = '';
+        END IF;
+        SELECT id_tipo_donacion INTO v_id_tipo
+        FROM tipo_donacion WHERE nombre_tipo = v_type_name LIMIT 1;
+        IF v_id_tipo IS NOT NULL THEN
+            INSERT IGNORE INTO escuela_tipo_donacion (id_escuela, id_tipo_donacion)
+            VALUES (p_id_escuela, v_id_tipo);
+        END IF;
+        SET v_id_tipo = NULL;
+    END WHILE;
+
+    COMMIT;
+END$$
+
+
+DROP PROCEDURE IF EXISTS sp_actualizar_progreso_escuela$$
+CREATE PROCEDURE sp_actualizar_progreso_escuela(
+    IN p_id_escuela CHAR(36),
+    IN p_prog_financ INT,
+    IN p_prog_mat INT,
+    IN p_prog_vol INT
+)
+BEGIN
+    DECLARE v_promedio DECIMAL(5,2);
+    DECLARE v_nivel_condicion VARCHAR(30);
+
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        ROLLBACK;
+        RESIGNAL;
+    END;
+
+    START TRANSACTION;
+
+    IF NOT EXISTS (SELECT 1 FROM escuela WHERE id_escuela = p_id_escuela) THEN
+        SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'Escuela no encontrada';
+    END IF;
+
+    SET v_promedio = (p_prog_financ + p_prog_mat + p_prog_vol) / 3;
+
+    SET v_nivel_condicion = CASE
+        WHEN v_promedio >= 80 THEN 'Ideal'
+        WHEN v_promedio >= 60 THEN 'Alto'
+        WHEN v_promedio >= 40 THEN 'Medio'
+        WHEN v_promedio >= 20 THEN 'Básico'
+        ELSE 'Mínimo'
+    END;
+
+    UPDATE escuela
+    SET progreso_financiamiento = p_prog_financ,
+        progreso_materiales = p_prog_mat,
+        progreso_voluntariado = p_prog_vol,
+        nivel_condicion = v_nivel_condicion
+    WHERE id_escuela = p_id_escuela;
+
+    COMMIT;
+END$$
+
+
+DROP PROCEDURE IF EXISTS sp_registrar_solicitud_apoyo$$
+CREATE PROCEDURE sp_registrar_solicitud_apoyo(
+    IN p_id_solicitud  CHAR(36),
+    IN p_nombre_contacto VARCHAR(100),
+    IN p_institucion VARCHAR(150),
+    IN p_nombre_municipio VARCHAR(80),
+    IN p_tipo_institucion VARCHAR(80),
+    IN p_forma_participacion VARCHAR(60),
+    IN p_telefono VARCHAR(20),
+    IN p_correo VARCHAR(100),
+    IN p_notas TEXT,
+    IN p_id_escuela_interes CHAR(36),
+    IN p_categoria_interes VARCHAR(100)
+)
+BEGIN
+    DECLARE v_id_municipio INT DEFAULT NULL;
+
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        ROLLBACK;
+        RESIGNAL;
+    END;
+
+    START TRANSACTION;
+
+    SELECT id_municipio INTO v_id_municipio
+    FROM municipio WHERE nombre_municipio = p_nombre_municipio LIMIT 1;
+
+    IF p_id_escuela_interes IS NOT NULL
+       AND NOT EXISTS (SELECT 1 FROM escuela WHERE id_escuela = p_id_escuela_interes)
+    THEN
+        SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'La escuela de interés no existe';
+    END IF;
+
+    INSERT INTO solicitud_apoyo (
+        id_solicitud, nombre_contacto, institucion,
+        id_municipio, tipo_institucion, forma_participacion,
+        telefono, correo, notas_adicionales,
+        id_escuela_interes, categoria_interes
+    ) VALUES (
+        p_id_solicitud, p_nombre_contacto, p_institucion,
+        v_id_municipio, p_tipo_institucion, p_forma_participacion,
+        p_telefono, p_correo, p_notas,
+        p_id_escuela_interes, p_categoria_interes
+    );
+
+    COMMIT;
+END$$
+
+
+DROP PROCEDURE IF EXISTS sp_eliminar_escuela$$
+CREATE PROCEDURE sp_eliminar_escuela(
+    IN p_id_escuela CHAR(36)
+)
+BEGIN
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        ROLLBACK;
+        RESIGNAL;
+    END;
+
+    START TRANSACTION;
+
+    IF NOT EXISTS (SELECT 1 FROM escuela WHERE id_escuela = p_id_escuela) THEN
+        SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'Escuela no encontrada';
+    END IF;
+
+    DELETE FROM escuela_necesidad WHERE id_escuela = p_id_escuela;
+    DELETE FROM escuela_tipo_donacion WHERE id_escuela = p_id_escuela;
+    DELETE FROM solicitud_apoyo WHERE id_escuela_interes = p_id_escuela;
+    DELETE FROM escuela WHERE id_escuela = p_id_escuela;
+
+    COMMIT;
+END$$
+
+
+DELIMITER ;
+
+
+
+DELIMITER $$
+
+DROP PROCEDURE IF EXISTS sp_registrar_historial_progreso$$
+CREATE PROCEDURE sp_registrar_historial_progreso(
+    IN p_id_escuela CHAR(36),
+    IN p_prog_financ INT,
+    IN p_prog_mat INT,
+    IN p_prog_vol INT,
+    IN p_nivel VARCHAR(30)
+)
+BEGIN
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        ROLLBACK;
+        RESIGNAL;
+    END;
+
+    START TRANSACTION;
+
+    INSERT INTO escuela_historial_progreso (
+        id_escuela,
+        prog_financiamiento,
+        prog_materiales,
+        prog_voluntariado,
+        nivel_condicion
+    ) VALUES (
+        p_id_escuela,
+        p_prog_financ,
+        p_prog_mat,
+        p_prog_vol,
+        p_nivel
+    );
+
+    COMMIT;
+END$$
+
+DELIMITER ;
+
+
+DELIMITER $$
+
+DROP TRIGGER IF EXISTS trg_after_insert_solicitud$$
+CREATE TRIGGER trg_after_insert_solicitud
+AFTER INSERT ON solicitud_apoyo
+FOR EACH ROW
+BEGIN
+    DECLARE v_f INT DEFAULT 0;
+    DECLARE v_m INT DEFAULT 0;
+    DECLARE v_v INT DEFAULT 0;
+
+    IF NEW.id_escuela_interes IS NOT NULL THEN
+        SELECT progreso_financiamiento,
+               progreso_materiales,
+               progreso_voluntariado
+        INTO   v_f, v_m, v_v
+        FROM   escuela
+        WHERE  id_escuela = NEW.id_escuela_interes;
+
+        CALL sp_actualizar_progreso_escuela(NEW.id_escuela_interes, v_f, v_m, v_v);
+    END IF;
+END$$
+
+DROP TRIGGER IF EXISTS trg_after_update_progreso$$
+CREATE TRIGGER trg_after_update_progreso
+AFTER UPDATE ON escuela
+FOR EACH ROW
+BEGIN
+    IF OLD.progreso_financiamiento <> NEW.progreso_financiamiento
+    OR OLD.progreso_materiales <> NEW.progreso_materiales
+    OR OLD.progreso_voluntariado <> NEW.progreso_voluntariado
+    THEN
+        CALL sp_registrar_historial_progreso(
+            NEW.id_escuela,
+            NEW.progreso_financiamiento,
+            NEW.progreso_materiales,
+            NEW.progreso_voluntariado,
+            NEW.nivel_condicion
+        );
+    END IF;
+END$$
+
+
+DROP TRIGGER IF EXISTS trg_before_delete_escuela$$
+CREATE TRIGGER trg_before_delete_escuela
+BEFORE DELETE ON escuela
+FOR EACH ROW
+BEGIN
+    CALL sp_registrar_historial_progreso(
+        OLD.id_escuela,
+        OLD.progreso_financiamiento,
+        OLD.progreso_materiales,
+        OLD.progreso_voluntariado,
+        OLD.nivel_condicion
+    );
+END$$
+
+
+DELIMITER ;
+
+
+
+CREATE OR REPLACE VIEW v_escuelas_completas AS
+SELECT
+    e.id_escuela,
+    e.nombre,
+    m.nombre_municipio AS county,
+    nv.nombre_nivel AS nivel,
+    e.num_estudiantes AS students,
+    e.num_maestros AS teachers,
+    e.telefono,
+    e.email,
+    e.direccion,
+    e.descripcion,
+    e.url_imagen AS image,
+    e.progreso_financiamiento AS fundingProgress,
+    e.progreso_materiales AS materialsProgress,
+    e.progreso_voluntariado AS volunteerHoursProgress,
+    e.nivel_condicion AS nivelCondicion
+FROM escuela e
+JOIN  municipio m ON e.id_municipio = m.id_municipio
+LEFT JOIN nivel_educativo nv ON e.id_nivel = nv.id_nivel;
+
+
+CREATE OR REPLACE VIEW v_solicitudes_con_municipio AS
+SELECT
+    s.id_solicitud,
+    s.nombre_contacto,
+    s.institucion,
+    m.nombre_municipio AS municipio,
+    s.tipo_institucion,
+    s.forma_participacion,
+    s.telefono,
+    s.correo,
+    s.notas_adicionales,
+    s.fecha_recepcion,
+    s.id_escuela_interes,
+    s.categoria_interes
+FROM solicitud_apoyo s
+LEFT JOIN municipio m ON s.id_municipio = m.id_municipio
+ORDER BY s.fecha_recepcion DESC;
+
+
+CREATE OR REPLACE VIEW v_estadisticas_dashboard AS
+SELECT
+    (SELECT COUNT(*) FROM escuela) AS total_escuelas,
+    (SELECT COUNT(*) FROM escuela_necesidad) AS total_necesidades,
+    (SELECT COUNT(*) FROM solicitud_apoyo) AS total_solicitudes,
+    (SELECT ROUND(AVG(progreso_financiamiento), 0) FROM escuela) AS progreso_promedio,
+    (SELECT COUNT(*) FROM escuela
+     WHERE nivel_condicion IN ('Básico','Medio','Alto','Ideal')) AS escuelas_basico_superior;
+
+
+CREATE OR REPLACE VIEW v_necesidades_por_escuela AS
+SELECT
+    en.id_escuela,
+    nc.id_necesidad,
+    nc.nombre_necesidad,
+    nc.categoria_general,
+    nc.cantidad_requerida,
+    nc.cantidad_recibida,
+    nc.prioridad,
+    nc.propuesta,
+    nc.unidad,
+    nc.estado,
+    nc.detalles
+FROM escuela_necesidad en
+JOIN necesidad_catalogo nc ON en.id_necesidad = nc.id_necesidad;
