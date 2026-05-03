@@ -28,10 +28,6 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'frontend-mep', 'index.html'));
 });
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'frontend-mep', 'index.html'));
-});
-
 app.use('/api/auth', authRoutes);
 app.use('/api/schools', schoolRoutes);
 app.use('/api/support-requests', requestRoutes);
@@ -39,8 +35,12 @@ app.use('/api', catalogRoutes);
 
 app.use('/uploads', express.static('uploads'));
 
-app.use((req, res) => {
-  res.status(404).json({ message: 'Ruta no encontrada' });
+app.get('*', (req, res) => {
+  if (req.originalUrl.startsWith('/api')) {
+    return res.status(404).json({ message: 'Ruta no encontrada' });
+  }
+
+  res.sendFile(path.join(__dirname, 'frontend-mep', 'index.html'));
 });
 
 app.listen(PORT, () => {
