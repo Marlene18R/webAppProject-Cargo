@@ -36,10 +36,6 @@ jobs:
     if: github.event_name == 'push' && github.ref == 'refs/heads/prueba'
     runs-on: ubuntu-latest
 
-    defaults:
-      run:
-        working-directory: backend-mep
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -48,5 +44,5 @@ jobs:
         uses: azure/webapps-deploy@v3
         with:
           app-name: myapp-marlene
-          package: .
+          package: backend-mep
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
