@@ -5,7 +5,10 @@ require('dotenv').config();
 const login = async (req, res) => {
   const { email, password } = req.body;
   try {
-    const [rows] = await pool.query('SELECT * FROM admin_usuario WHERE email = ?', [email]);
+    const [rows] = await pool.query(
+      'SELECT * FROM admin_usuario WHERE email = ?',
+      [email]
+    );
     if (rows.length === 0) {
       return res.status(401).json({ message: 'Credenciales inválidas' });
     }
@@ -24,8 +27,8 @@ const login = async (req, res) => {
       user: {
         id: admin.id_admin,
         email: admin.email,
-        nombre: admin.nombre_completo,
-      },
+        nombre: admin.nombre_completo
+      }
     });
   } catch (error) {
     console.error(error);

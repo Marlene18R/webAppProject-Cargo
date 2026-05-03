@@ -11,7 +11,7 @@ const handleValidationErrors = (req, res, next) => {
 const validateLogin = [
   body('email').isEmail().withMessage('Email inválido'),
   body('password').notEmpty().withMessage('Contraseña requerida'),
-  handleValidationErrors,
+  handleValidationErrors
 ];
 
 const validateSchool = [
@@ -23,7 +23,7 @@ const validateSchool = [
   body('materialsProgress').optional().isInt({ min: 0, max: 100 }).toInt(),
   body('volunteerHoursProgress').optional().isInt({ min: 0, max: 100 }).toInt(),
   body('donationTypes').optional().isArray(),
-  handleValidationErrors,
+  handleValidationErrors
 ];
 
 const validateSupportRequest = [
@@ -34,11 +34,11 @@ const validateSupportRequest = [
   body('formaParticipacion').notEmpty(),
   body('telefono').notEmpty(),
   body('correo').isEmail().withMessage('Email inválido'),
-  handleValidationErrors,
+  handleValidationErrors
 ];
 
 module.exports = {
   validateLogin,
   validateSchool,
-  validateSupportRequest,
+  validateSupportRequest
 };

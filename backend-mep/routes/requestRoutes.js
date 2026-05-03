@@ -2,7 +2,7 @@ const express = require('express');
 const {
   getSupportRequests,
   createSupportRequest,
-  deleteSupportRequest,
+  deleteSupportRequest
 } = require('../controllers/requestController');
 const { verifyToken } = require('../middleware/auth');
 const { validateSupportRequest } = require('../middleware/validation');
