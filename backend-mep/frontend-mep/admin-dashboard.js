@@ -5,8 +5,8 @@
 (function () {
   'use strict';
 
-  const API_URL = 'http://localhost:5000/api';
-  const SERVER_URL = 'http://localhost:5000';
+  const API_URL = '/api';
+  const SERVER_URL = '';
 
   function resolveImageUrl(img) {
     if (!img) return '';

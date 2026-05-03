@@ -2,7 +2,7 @@
 (function () {
   'use strict';
 
-  const API_URL = 'http://localhost:5000/api';
+  const API_URL = '/api';
 
   const DEMO_EMAIL    = 'admin@miescuela.org';
   const DEMO_PASSWORD = 'admin123';
