@@ -4,6 +4,10 @@ on:
   push:
     branches: [prueba]
 
+defaults:
+  run:
+    working-directory: backend-mep
+
 jobs:
   quality:
     runs-on: ubuntu-latest
