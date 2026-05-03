@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
+const path = require('path');
 
 dotenv.config();
 
@@ -31,14 +32,12 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'frontend-mep', 'index.html'));
 });
 
-
 app.use('/api/auth', authRoutes);
 app.use('/api/schools', schoolRoutes);
 app.use('/api/support-requests', requestRoutes);
 app.use('/api', catalogRoutes);
 
 app.use('/uploads', express.static('uploads'));
-
 
 app.use((req, res) => {
   res.status(404).json({ message: 'Ruta no encontrada' });

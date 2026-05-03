@@ -2,7 +2,7 @@ import js from '@eslint/js';
 
 export default [
   {
-    ignores: ['**/*.test.js', '**/*.spec.js']
+    ignores: ['frontend-mep/**', 'uploads/**']
   },
 
   js.configs.recommended,
